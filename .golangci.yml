@@ -1,0 +1,82 @@
+run:
+    tests: false
+
+issues:
+    exclude-use-default: false
+
+linters:
+    disable-all: true
+    enable:
+        - govet
+        - errcheck
+        - golint
+        - staticcheck
+        - gocritic
+        - gosimple
+        - gosec
+        - interfacer
+        - unconvert
+        - ineffassign
+        - goconst
+        - gofmt
+        - goimports
+        - bodyclose
+        - misspell
+        - scopelint
+        - lll
+        - gocyclo
+        - typecheck
+        - whitespace
+
+linters-settings:
+
+    govet:
+        check-shadowing: true
+        settings:
+            printf:
+                funcs:
+                    - (github.com/sirupsen/logrus).Infof
+                    - (github.com/sirupsen/logrus).Warnf
+                    - (github.com/sirupsen/logrus).Errorf
+                    - (github.com/sirupsen/logrus).Fatalf
+
+    errcheck:
+        check-type-assertions: true
+        check-blank: true
+
+    golint:
+        min-confidence: 0.8
+
+    gocritic:
+        enabled-tags:
+             - diagnostic
+             - experimental
+             - opinionated
+             - performance
+             - style
+        disabled-checks:
+             - dupImport # https://github.com/go-critic/go-critic/issues/845
+             - ifElseChain
+             - octalLiteral
+             - whyNoLint
+             - wrapperFunc
+
+    goconst:
+        min-len: 2
+        min-occurrences: 4
+
+    gofmt:
+        simplify: true
+
+    goimports:
+        local-prefixes: github.com/sdslabs/status
+
+    misspell:
+        locale: US
+        ignore-words: []
+
+    lll:
+        line-length: 140
+
+    gocyclo:
+        min-complexity: 20
