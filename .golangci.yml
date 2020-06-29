@@ -69,7 +69,7 @@ linters-settings:
         simplify: true
 
     goimports:
-        local-prefixes: github.com/sdslabs/status
+        local-prefixes: github.com/sdslabs/kiwi
 
     misspell:
         locale: US
