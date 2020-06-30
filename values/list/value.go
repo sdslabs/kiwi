@@ -82,7 +82,7 @@ const (
 	// Remove removes the elements specified from the list.
 	// These can be indexes or the elements themselves.
 	//
-	// Returns a slice of removed strings.
+	// Returns the removed string.
 	Remove kiwi.Action = "REMOVE"
 
 	// Find gets the index of element if it exists else -1.
