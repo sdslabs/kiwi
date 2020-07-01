@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	kiwi.RegisterValue(func() kiwi.Value { return new(Value) })
+	kiwi.RegisterValue(func() kiwi.Value { return &Value{} })
 }
 
 // Type of set value.
