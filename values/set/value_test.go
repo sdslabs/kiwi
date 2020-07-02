@@ -196,11 +196,11 @@ func TestSet_Len(t *testing.T) {
 	// try getting length with invalid number of params
 	_, err = store.Do(testKey, Len, "noParamsShouldBePassed")
 	if err == nil {
-		t.Errorf("expected error; got nil while finding with invalid number of params (0)")
+		t.Errorf("expected error; got nil while finding with invalid number of params (1)")
 	}
 
 	if er := errors.Unwrap(err); er != ErrInvalidParamLen {
-		t.Errorf("expected ErrInvalidParamLen while finding with 0 parameters; got %v", err)
+		t.Errorf("expected ErrInvalidParamLen while finding with 1 parameters; got %v", err)
 	}
 }
 
@@ -232,11 +232,11 @@ func TestSet_Get(t *testing.T) {
 	// try getting length with invalid number of params
 	_, err = store.Do(testKey, Get, "noParamsShouldBePassed")
 	if err == nil {
-		t.Errorf("expected error; got nil while finding with invalid number of params (0)")
+		t.Errorf("expected error; got nil while finding with invalid number of params (1)")
 	}
 
 	if er := errors.Unwrap(err); er != ErrInvalidParamLen {
-		t.Errorf("expected ErrInvalidParamLen while finding with 0 parameters; got %v", err)
+		t.Errorf("expected ErrInvalidParamLen while finding with 1 parameters; got %v", err)
 	}
 }
 

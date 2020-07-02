@@ -40,15 +40,14 @@ func newParamTypeErr(p, e interface{}) error {
 }
 
 const (
-	// Insert inserts the string in the set.
+	// Insert inserts the element(s) in the set.
 	//
-	// Returns the added string.
+	// Returns an array of added elements.
 	Insert kiwi.Action = "INSERT"
 
-	// Remove removes the string from the set.
-	// If no index is provided it gets the last element.
+	// Remove removes the element(s) from the set.
 	//
-	// Returns removed string.
+	// Returns an array of removed elements.
 	Remove kiwi.Action = "REMOVE"
 
 	// Has checks if set has the element.

@@ -557,7 +557,7 @@ func listToIFace(slice []string) []interface{} {
 	return v
 }
 
-// verifyList tests if the key in store and
+// verifyList tests if the lsit in store and expected [] string are same.
 func verifyList(store *kiwi.Store, expected []string) error {
 	v, err := store.Do(testKey, Slice)
 	if err != nil {
