@@ -82,8 +82,14 @@ func (s *Store) UpdateKey(key string, typ ValueType) error {
 	}
 
 	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	old := s.kv[key]
+	old.mu.Lock()
+	defer old.mu.Unlock()
+
 	s.kv[key] = valWrapper{val: v, mu: &sync.RWMutex{}}
-	s.mu.Unlock()
+
 	return nil
 }
 
@@ -94,8 +100,14 @@ func (s *Store) DeleteKey(key string) error {
 	}
 
 	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	old := s.kv[key]
+	old.mu.Lock()
+	defer old.mu.Unlock()
+
 	delete(s.kv, key)
-	s.mu.Unlock()
+
 	return nil
 }
 
