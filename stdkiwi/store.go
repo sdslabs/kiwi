@@ -77,6 +77,18 @@ func (s *Store) List(key string) *List {
 	}
 }
 
+// Hash returns a "Hashmap" with the key set as "key".
+//
+// This does not verify if the key and value type pair is correct.
+// If this does not work, "Do" will eventually throw an error.
+// To avoid this use "GuardE" method or "Guard" if schema is pre-defined.
+func (s *Store) Hash(key string) *Hash {
+	return &Hash{
+		store: s,
+		key:   key,
+	}
+}
+
 // Value can be used to access the methods for standard value types.
 type Value interface {
 	// Guard should panic if the key does not correspond to the correct type.
