@@ -78,7 +78,7 @@ func TestList(t *testing.T) {
 		t.Errorf("could not Pop: %v", err)
 	}
 
-	// remove first two elements
+	// remove first element
 	err = s.Remove(0)
 	if err != nil {
 		t.Errorf("could not Remove: %v", err)
@@ -89,14 +89,14 @@ func TestList(t *testing.T) {
 		t.Errorf("could not RemoveS: %v", err)
 	}
 
-	// now what we should be left with is only "C"
+	// now we should be left with only 3 elements
 	length, err = s.Len()
 	if err != nil {
 		t.Errorf("could not Len: %s", err)
 	}
 
 	if length != 3 {
-		t.Errorf("expected length: 1; got %d", length)
+		t.Errorf("expected length: 3; got %d", length)
 	}
 
 	slice, err = s.Slice(0, length)
