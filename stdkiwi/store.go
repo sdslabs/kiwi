@@ -77,6 +77,18 @@ func (s *Store) List(key string) *List {
 	}
 }
 
+// Set returns a "Set" with the key set as "key".
+//
+// This does not verify if the key and value type pair is correct.
+// If this does not work, "Do" will eventually throw an error.
+// To avoid this use "GuardE" method or "Guard" if schema is pre-defined.
+func (s *Store) Set(key string) *Set {
+	return &Set{
+		store: s,
+		key:   key,
+	}
+}
+    
 // Hash returns a "Hashmap" with the key set as "key".
 //
 // This does not verify if the key and value type pair is correct.
@@ -84,7 +96,7 @@ func (s *Store) List(key string) *List {
 // To avoid this use "GuardE" method or "Guard" if schema is pre-defined.
 func (s *Store) Hash(key string) *Hash {
 	return &Hash{
-		store: s,
+    store: s,
 		key:   key,
 	}
 }
