@@ -50,7 +50,7 @@ func TestHash(t *testing.T) {
 		t.Errorf("length expected: %d; got %d", length, len(values))
 	}
 
-	if values[0] != "x" || values[1] != "y" {
+	if !((values[0] == "x" && values[1] == "y") || (values[0] == "y" && values[1] == "x")) {
 		t.Errorf("Get did not return correct value(s)")
 	}
 
@@ -72,7 +72,7 @@ func TestHash(t *testing.T) {
 		t.Errorf("length expected: %d; got %d", length, len(keys))
 	}
 
-	if keys[0] != "a" || keys[1] != "b" {
+	if !((keys[0] == "a" && keys[1] == "b") || (keys[0] == "b" && keys[1] == "a")) {
 		t.Errorf("Key did not return correct key(s)")
 	}
 
