@@ -46,8 +46,8 @@ Package `github.com/sdslabs/kiwi/stdkiwi` implements type safe methods with stan
 These types include:
 - [x] str (`github.com/sdslabs/kiwi/values/str`): String value
 - [x] list (`github.com/sdslabs/kiwi/values/list`): A list of strings
-- [ ] set (TODO): An exclusive set of strings
-- [ ] hash (TODO): A string-string hashmap
+- [x] set (`github.com/sdslabs/kiwi/values/set`): An exclusive set of strings
+- [x] hash (`github.com/sdslabs/kiwi/values/hash`): A string-string hashmap
 - [ ] zset (TODO): A set with each element having scores
 
 If you only require the aforementioned value types, use the `stdkiwi` package.
