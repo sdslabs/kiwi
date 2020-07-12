@@ -5,6 +5,7 @@
 package stdkiwi
 
 import (
+	"sort"
 	"testing"
 
 	"github.com/sdslabs/kiwi/values/set"
@@ -44,6 +45,19 @@ func TestSet(t *testing.T) {
 
 	if len(elems) != length {
 		t.Errorf("length expected: %d; got %d", length, len(elems))
+	}
+
+	sort.Strings(elems)
+	sort.Strings(vals)
+	getAll := true
+	for i, j := range elems {
+		if j != vals[i] {
+			getAll = false
+			break
+		}
+	}
+	if getAll == false {
+		t.Errorf("get did not return correct elememt(s)")
 	}
 
 	ok, err := s.Has(vals[2])

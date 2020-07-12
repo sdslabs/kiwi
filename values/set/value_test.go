@@ -229,6 +229,13 @@ func TestSet_Get(t *testing.T) {
 		t.Errorf("expected length of elems: %d; got %d", len(testVals), len(set))
 	}
 
+	for i := 0; i < len(set); i++ {
+		_, ok = testVals[set[i]]
+		if ok == false {
+			t.Errorf("element %q is not present in the set", set[i])
+		}
+	}
+
 	// try getting length with invalid number of params
 	_, err = store.Do(testKey, Get, "noParamsShouldBePassed")
 	if err == nil {
