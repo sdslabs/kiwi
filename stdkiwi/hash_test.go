@@ -63,7 +63,7 @@ func TestHash(t *testing.T) {
 		t.Errorf("expected true; got false")
 	}
 
-	keys, err := s.Key()
+	keys, err := s.Keys()
 	if err != nil {
 		t.Errorf("could not Key: %v", err)
 	}

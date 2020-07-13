@@ -266,7 +266,7 @@ func TestHash_Key(t *testing.T) {
 	// to insert the hashmap into the store
 	testInsertHashHelper(store, testVals, t)
 
-	v, err := store.Do(testKey, Key)
+	v, err := store.Do(testKey, Keys)
 	if err != nil {
 		t.Errorf("could not get hashmap's keys from store: %v", err)
 	}
@@ -288,7 +288,7 @@ func TestHash_Key(t *testing.T) {
 	}
 
 	// try getting keys with invalid number of params
-	_, err = store.Do(testKey, Key, "noParamsShouldBePassed")
+	_, err = store.Do(testKey, Keys, "noParamsShouldBePassed")
 	if err == nil {
 		t.Errorf("expected error; got nil while finding with invalid number of params (1)")
 	}

@@ -106,9 +106,9 @@ func (h *Hash) Get(keys ...string) ([]string, error) {
 	return values, nil
 }
 
-// Key gets all the keys of the hashmap.
-func (h *Hash) Key() ([]string, error) {
-	v, err := h.store.Do(h.key, hash.Key)
+// Keys gets all the keys of the hashmap.
+func (h *Hash) Keys() ([]string, error) {
+	v, err := h.store.Do(h.key, hash.Keys)
 	if err != nil {
 		return nil, err
 	}

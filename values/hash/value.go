@@ -66,10 +66,10 @@ const (
 	// Returns an array of values.
 	Get kiwi.Action = "GET"
 
-	// Key gets all the keys from the hash-map.
+	// Keys gets all the keys from the hash-map.
 	//
 	// Returns an array of keys.
-	Key kiwi.Action = "KEY"
+	Keys kiwi.Action = "KEYS"
 
 	// Map gets a copy of hash-map.
 	//
@@ -90,7 +90,7 @@ func (v *Value) DoMap() map[kiwi.Action]kiwi.DoFunc {
 		Has:    v.has,
 		Len:    v.len,
 		Get:    v.get,
-		Key:    v.key,
+		Keys:   v.keys,
 		Map:    v.copymap,
 	}
 }
@@ -191,7 +191,7 @@ func (v *Value) get(params ...interface{}) (interface{}, error) {
 }
 
 // key implements the KEY action.
-func (v *Value) key(params ...interface{}) (interface{}, error) {
+func (v *Value) keys(params ...interface{}) (interface{}, error) {
 	if len(params) != 0 {
 		return nil, newParamLenErr(len(params), 0)
 	}
