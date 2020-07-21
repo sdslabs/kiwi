@@ -5,6 +5,7 @@
 package zset
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/sdslabs/kiwi"
@@ -109,6 +110,36 @@ func (v *Value) DoMap() map[kiwi.Action]kiwi.DoFunc {
 		PeekMax:   v.peekmax,
 		PeekMin:   v.peekmin,
 	}
+}
+
+// ToJSON returns the raw byte array of v's data
+func (v *Value) ToJSON() (json.RawMessage, error) {
+	nodes := v.GetByRankRange(1, -1, false)
+
+	vals := map[string]int{}
+	for _, node := range nodes {
+		vals[node.Key()] = int(node.Score())
+	}
+
+	c, err := json.Marshal(vals)
+	if err != nil {
+		return nil, err
+	}
+	return json.RawMessage(c), nil
+}
+
+// FromJSON populates the s with the data from RawMessage
+func (v *Value) FromJSON(rawmessage json.RawMessage) error {
+	vals := map[string]int{}
+	if err := json.Unmarshal(rawmessage, &vals); err != nil {
+		return err
+	}
+
+	for key, score := range vals {
+		v.AddOrUpdate(key, sortedset.SCORE(score), nil)
+	}
+
+	return nil
 }
 
 // insert implements the INSERT action.
@@ -237,3 +268,6 @@ func (v *Value) peekmin(params ...interface{}) (interface{}, error) {
 	}
 	return temp.Key(), nil
 }
+
+// Interface guard.
+var _ kiwi.Value = (*Value)(nil)

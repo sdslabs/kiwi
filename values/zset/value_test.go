@@ -5,6 +5,8 @@
 package zset
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"testing"
@@ -371,6 +373,99 @@ func TestZset_PeekMin(t *testing.T) {
 
 	if er := errors.Unwrap(err); er != ErrInvalidParamLen {
 		t.Errorf("expected ErrInvalidParamLen while using peekmin with 1 parameters; got %v", err)
+	}
+}
+
+func TestSet_JSON(t *testing.T) {
+	store, err := newTestStore()
+	if err != nil {
+		t.Fatalf("couldn't create store: %v", err)
+	}
+
+	testVals := newTestElems()
+	testInsertZsetHelper(store, testVals, t)
+
+	obj, err := store.ToJSON(testKey)
+	if err != nil {
+		t.Errorf("ToJSON returned unexpected error: %v", err)
+	}
+
+	// add a new key and initiate that key FromJSON and check if the value equals
+	// by invoking the "PEEKMAX" and "PEEKMIN" actions.
+	newKey := "xyz"
+	err = store.AddKey(newKey, Type)
+	if err != nil {
+		t.Fatalf("cannot add new key to the store: %v", err)
+	}
+
+	err = store.FromJSON(newKey, obj)
+	if err != nil {
+		t.Errorf("FromJSON returned unexpected error: %v", err)
+	}
+
+	_, err = store.Do(testKey, Increment, testVals[0], 100)
+	if err != nil {
+		t.Errorf("cannot INCREMENT from the store: %v", err)
+	}
+
+	_, err = store.Do(testKey, Increment, testVals[len(testVals)-1], -100)
+	if err != nil {
+		t.Errorf("cannot INCREMENT from the store: %v", err)
+	}
+
+	v, err := store.Do(testKey, PeekMax)
+	if err != nil {
+		t.Errorf("cannot PEEKMAX from store: %v", err)
+	}
+
+	if testVals[0] != v.(string) {
+		t.Errorf("expected %q with max score; got %q", testVals[0], v.(string))
+	}
+
+	v, err = store.Do(testKey, PeekMin)
+	if err != nil {
+		t.Errorf("cannot PEEKMIN from store: %v", err)
+	}
+
+	if testVals[len(testVals)-1] != v.(string) {
+		t.Errorf("expected %q with max score; got %q", testVals[0], v.(string))
+	}
+
+	// NB: In zsets we cannot test the full representation of JSON value,
+	// since ordering of elements can change in the JSON representation
+	// and the map representation (Go's maps are unordered).
+	//
+	// To test the representation in JSON, we can create a test value with
+	// only one key, hence change in ordering won't affect the outcome.
+	testK, testS := "a", 102
+	expectedJSON, err := json.Marshal(map[string]int{testK: testS})
+	if err != nil {
+		t.Fatalf("cannot marshal map to test: %v", err)
+	}
+
+	newKey = "def"
+	err = store.AddKey(newKey, Type)
+	if err != nil {
+		t.Fatalf("cannot add new key to the store: %v", err)
+	}
+
+	_, err = store.Do(newKey, Insert, testK)
+	if err != nil {
+		t.Errorf("cannot insert element into zset: %v", err)
+	}
+
+	_, err = store.Do(newKey, Increment, testK, testS)
+	if err != nil {
+		t.Errorf("cannot increment score of element into zset: %v", err)
+	}
+
+	obj, err = store.ToJSON(newKey)
+	if err != nil {
+		t.Errorf("ToJSON returned unexpected error: %v", err)
+	}
+
+	if !bytes.Equal(obj, expectedJSON) {
+		t.Errorf("expected JSON:\n%s; got:\n%s", string(expectedJSON), string(obj))
 	}
 }
 

@@ -5,6 +5,8 @@
 package hash
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
 	"reflect"
 	"testing"
@@ -332,6 +334,80 @@ func TestHash_Map(t *testing.T) {
 
 	if er := errors.Unwrap(err); er != ErrInvalidParamLen {
 		t.Errorf("expected ErrInvalidParamLen while finding with 1 parameters; got %v", err)
+	}
+}
+
+func TestHash_JSON(t *testing.T) {
+	store, err := newTestStore()
+	if err != nil {
+		t.Fatalf("couldn't create store: %v", err)
+	}
+
+	testVals := newTestHash()
+	testInsertHashHelper(store, testVals, t)
+
+	obj, err := store.ToJSON(testKey)
+	if err != nil {
+		t.Errorf("ToJSON returned unexpected error: %v", err)
+	}
+
+	// add a new key and initiate that key FromJSON and check if the value equals
+	// by invoking the "GET" action.
+	newKey := "xyz"
+	err = store.AddKey(newKey, Type)
+	if err != nil {
+		t.Fatalf("cannot add new key to the store: %v", err)
+	}
+
+	err = store.FromJSON(newKey, obj)
+	if err != nil {
+		t.Errorf("FromJSON returned unexpected error: %v", err)
+	}
+
+	v, err := store.Do(testKey, Map)
+	if err != nil {
+		t.Errorf("cannot GET from the store: %v", err)
+	}
+
+	str, ok := v.(map[string]string)
+	if !ok {
+		t.Errorf("GET did not return a map[string]string")
+	}
+
+	if !reflect.DeepEqual(str, testVals) {
+		t.Errorf("expected string FromJSON: %q; got %q", testVals, str)
+	}
+
+	// NB: In hashes we cannot test the full representation of JSON value,
+	// since ordering of elements can change in the JSON representation
+	// and the map representation (Go's maps are unordered).
+	//
+	// To test the representation in JSON, we can create a test value with
+	// only one key-value, hence change in ordering won't affect the outcome.
+	testK, testV := "a", "b"
+	expectedJSON, err := json.Marshal(map[string]string{testK: testV})
+	if err != nil {
+		t.Fatalf("cannot marshal map to test: %v", err)
+	}
+
+	newKey = "def"
+	err = store.AddKey(newKey, Type)
+	if err != nil {
+		t.Fatalf("cannot add new key to the store: %v", err)
+	}
+
+	_, err = store.Do(newKey, Insert, testK, testV)
+	if err != nil {
+		t.Errorf("cannot insert element into hash: %v", err)
+	}
+
+	obj, err = store.ToJSON(newKey)
+	if err != nil {
+		t.Errorf("ToJSON returned unexpected error: %v", err)
+	}
+
+	if !bytes.Equal(obj, expectedJSON) {
+		t.Errorf("expected JSON:\n%s; got:\n%s", string(expectedJSON), string(obj))
 	}
 }
 

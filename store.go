@@ -5,6 +5,7 @@
 package kiwi
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"sync"
@@ -160,6 +161,47 @@ func (s *Store) Do(key string, action Action, params ...interface{}) (interface{
 
 	res, err := doFunc(params...)
 	return res, err
+}
+
+// ToJSON executes the action of converting for the value associated with the key into raw byte array.
+func (s *Store) ToJSON(key string) (json.RawMessage, error) {
+	if err := s.keyExists(key); err != nil {
+		return nil, err
+	}
+
+	s.mu.RLock()
+	v := s.kv[key]
+	s.mu.RUnlock()
+
+	v.mu.RLock()
+	defer v.mu.RUnlock()
+
+	res, err := v.val.ToJSON()
+	if err != nil {
+		return nil, fmt.Errorf("error in ToJSON: %v", err)
+	}
+
+	return res, nil
+}
+
+// FromJSON executes the action of converting the raw byte array for the value associated with the key into proper format.
+func (s *Store) FromJSON(key string, rawmessage json.RawMessage) error {
+	if err := s.keyExists(key); err != nil {
+		return err
+	}
+
+	s.mu.RLock()
+	v := s.kv[key]
+	s.mu.RUnlock()
+
+	v.mu.Lock()
+	defer v.mu.Unlock()
+
+	if err := v.val.FromJSON(rawmessage); err != nil {
+		return fmt.Errorf("error in FromJSON: %v", err)
+	}
+
+	return nil
 }
 
 // keyExists checks if the key exists in the store. Throws an error if it doesn't.

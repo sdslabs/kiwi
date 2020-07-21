@@ -4,7 +4,10 @@
 
 package kiwi
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 // Errors related to values.
 var (
@@ -47,6 +50,12 @@ type Value interface {
 
 	// DoMap returns a map which associates actions with a do function.
 	DoMap() map[Action]DoFunc
+
+	// ToJSON returns a raw byte array of the data.
+	ToJSON() (json.RawMessage, error)
+
+	// FromJSON returns the data in golang from a raw byte array.
+	FromJSON(json.RawMessage) error
 }
 
 // RegisterValue registers a new value type with the package.

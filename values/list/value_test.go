@@ -5,6 +5,8 @@
 package list
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"math/rand"
@@ -515,6 +517,60 @@ func TestList_Find(t *testing.T) {
 
 	if er := errors.Unwrap(err); er != ErrInvalidParamType {
 		t.Errorf("expected ErrInvalidParamType while finding with string as int; got %v", err)
+	}
+}
+
+func TestList_JSON(t *testing.T) {
+	store, err := newTestStore()
+	if err != nil {
+		t.Fatalf("couldn't create store: %v", err)
+	}
+
+	testVals := newTestList()
+
+	testAppendSliceHelper(store, testVals, t)
+
+	c, err := json.Marshal(testVals)
+	if err != nil {
+		t.Fatalf("cannot marshal test values: %v", err)
+	}
+	// to insert the set into the store
+	expectedJSON := json.RawMessage(c)
+
+	obj, err := store.ToJSON(testKey)
+	if err != nil {
+		t.Errorf("ToJSON returned unexpected error: %v", err)
+	}
+
+	if !bytes.Equal(obj, expectedJSON) {
+		t.Errorf("expected JSON:\n%s; got:\n%s", string(expectedJSON), string(obj))
+	}
+
+	// add a new key and initiate that key FromJSON and check if the value equals
+	// by invoking the "GET" action.
+	newKey := "xyz"
+	err = store.AddKey(newKey, Type)
+	if err != nil {
+		t.Fatalf("cannot add new key to the store: %v", err)
+	}
+
+	err = store.FromJSON(newKey, obj)
+	if err != nil {
+		t.Errorf("FromJSON returned unexpected error: %v", err)
+	}
+
+	v, err := store.Do(testKey, Slice, 0, 10)
+	if err != nil {
+		t.Errorf("cannot SLICE from the store: %v", err)
+	}
+
+	slice, ok := v.([]string)
+	if !ok {
+		t.Errorf("GET did not return a string")
+	}
+
+	if err = listEqual(slice, testVals); err != nil {
+		t.Errorf("expected string FromJSON: %q; got %q", testVals, slice)
 	}
 }
 
