@@ -5,6 +5,9 @@
 package str
 
 import (
+	"bytes"
+	"encoding/json"
+	"fmt"
 	"testing"
 
 	"github.com/sdslabs/kiwi"
@@ -45,8 +48,37 @@ func TestValue(t *testing.T) {
 		t.Errorf("get did not return correct string: got %s", str)
 	}
 
-	_, err = store.Do(key, Update)
-	if err == nil {
-		t.Errorf("did not get expected error when updating with invalid (0 num) params")
+	expectedJSON := json.RawMessage(fmt.Sprintf(`"%s"`, orig)) // "string"
+
+	obj, err := store.ToJSON(key)
+	if err != nil {
+		t.Errorf("ToJSON returned unexpected error: %v", err)
+	}
+	if !bytes.Equal(obj, expectedJSON) {
+		t.Errorf("expected JSON:\n%s; got:\n%s", string(expectedJSON), string(obj))
+	}
+
+	// add a new key and initiate that key FromJSON and check if the value equals
+	// by invoking the "GET" action.
+	newKey := "xyz"
+	err = store.AddKey(newKey, Type)
+	if err != nil {
+		t.Fatalf("cannot add new key to the store: %v", err)
+	}
+
+	err = store.FromJSON(newKey, obj)
+	if err != nil {
+		t.Errorf("FromJSON returned unexpected error: %v", err)
+	}
+	v, err := store.Do(key, Get)
+	if err != nil {
+		t.Errorf("cannot GET from the store: %v", err)
+	}
+	str, ok = v.(string)
+	if !ok {
+		t.Errorf("GET did not return a string")
+	}
+	if str != orig {
+		t.Errorf("expected string FromJSON: %q; got %q", orig, str)
 	}
 }

@@ -5,6 +5,7 @@
 package list
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/sdslabs/kiwi"
@@ -108,6 +109,20 @@ func (v *Value) DoMap() map[kiwi.Action]kiwi.DoFunc {
 		Remove: v.remove,
 		Find:   v.find,
 	}
+}
+
+// ToJSON returns the raw byte array of s's data
+func (v *Value) ToJSON() (json.RawMessage, error) {
+	c, err := json.Marshal(v)
+	if err != nil {
+		return nil, err
+	}
+	return json.RawMessage(c), nil
+}
+
+// FromJSON populates the s with the data from RawMessage
+func (v *Value) FromJSON(rawmessage json.RawMessage) error {
+	return json.Unmarshal(rawmessage, v)
 }
 
 // get implements the GET action.

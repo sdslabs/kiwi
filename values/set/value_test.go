@@ -5,6 +5,8 @@
 package set
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"testing"
@@ -244,6 +246,80 @@ func TestSet_Get(t *testing.T) {
 
 	if er := errors.Unwrap(err); er != ErrInvalidParamLen {
 		t.Errorf("expected ErrInvalidParamLen while finding with 1 parameters; got %v", err)
+	}
+}
+
+func TestSet_JSON(t *testing.T) {
+	store, err := newTestStore()
+	if err != nil {
+		t.Fatalf("couldn't create store: %v", err)
+	}
+
+	testVals := newTestSet()
+	testInsertSetHelper(store, testVals, t)
+
+	obj, err := store.ToJSON(testKey)
+	if err != nil {
+		t.Errorf("ToJSON returned unexpected error: %v", err)
+	}
+
+	// add a new key and initiate that key FromJSON and check if the value equals
+	// by invoking the "GET" action.
+	newKey := "xyz"
+	err = store.AddKey(newKey, Type)
+	if err != nil {
+		t.Fatalf("cannot add new key to the store: %v", err)
+	}
+
+	err = store.FromJSON(newKey, obj)
+	if err != nil {
+		t.Errorf("FromJSON returned unexpected error: %v", err)
+	}
+
+	v, err := store.Do(testKey, Get)
+	if err != nil {
+		t.Errorf("cannot GET from the store: %v", err)
+	}
+
+	str, ok := v.([]string)
+	if !ok {
+		t.Errorf("GET did not return a string")
+	}
+
+	if err = setEqual(str, testVals); err != nil {
+		t.Errorf("expected string FromJSON: %q; got %q", testVals, str)
+	}
+
+	// NB: In sets we cannot test the full representation of JSON value,
+	// since ordering of elements can change in the slice representation
+	// and the map representation (Go's maps are unordered).
+	//
+	// To test the representation in JSON, we can create a test value with
+	// only one element, hence change in ordering won't affect the outcome.
+	testElem := "a"
+	expectedJSON, err := json.Marshal([]string{testElem})
+	if err != nil {
+		t.Fatalf("cannot marshal slice to test: %v", err)
+	}
+
+	newKey = "def"
+	err = store.AddKey(newKey, Type)
+	if err != nil {
+		t.Fatalf("cannot add new key to the store: %v", err)
+	}
+
+	_, err = store.Do(newKey, Insert, testElem)
+	if err != nil {
+		t.Errorf("cannot insert element into set: %v", err)
+	}
+
+	obj, err = store.ToJSON(newKey)
+	if err != nil {
+		t.Errorf("ToJSON returned unexpected error: %v", err)
+	}
+
+	if !bytes.Equal(obj, expectedJSON) {
+		t.Errorf("expected JSON:\n%s; got:\n%s", string(expectedJSON), string(obj))
 	}
 }
 

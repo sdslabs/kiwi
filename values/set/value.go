@@ -5,6 +5,7 @@
 package set
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/sdslabs/kiwi"
@@ -80,6 +81,37 @@ func (v *Value) DoMap() map[kiwi.Action]kiwi.DoFunc {
 		Len:    v.len,
 		Get:    v.get,
 	}
+}
+
+// ToJSON returns the raw byte array of value
+func (v *Value) ToJSON() (json.RawMessage, error) {
+	vals := make([]string, len(*v))
+
+	i := 0
+	for k := range *v {
+		vals[i] = k
+		i++
+	}
+
+	c, err := json.Marshal(vals)
+	if err != nil {
+		return nil, err
+	}
+	return json.RawMessage(c), nil
+}
+
+// FromJSON populates the value with the data from RawMessage
+func (v *Value) FromJSON(rawmessage json.RawMessage) error {
+	vals := []string{}
+	if err := json.Unmarshal(rawmessage, &vals); err != nil {
+		return err
+	}
+
+	for _, c := range vals {
+		(*v)[c] = struct{}{}
+	}
+
+	return nil
 }
 
 // insert implements the INSERT action.
@@ -166,3 +198,6 @@ func (v *Value) get(params ...interface{}) (interface{}, error) {
 	}
 	return out, nil
 }
+
+// Interface guard.
+var _ kiwi.Value = (*Value)(nil)

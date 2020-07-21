@@ -5,6 +5,7 @@
 package hash
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/sdslabs/kiwi"
@@ -17,7 +18,7 @@ func init() {
 // Type of set value.
 const Type kiwi.ValueType = "hash"
 
-// Value can store a stirng-string hash map.
+// Value can store a string-string hash map.
 //
 // It implements the kiwi.Value interface.
 type Value map[string]string
@@ -93,6 +94,20 @@ func (v *Value) DoMap() map[kiwi.Action]kiwi.DoFunc {
 		Keys:   v.keys,
 		Map:    v.copymap,
 	}
+}
+
+// ToJSON returns the raw byte array of s's data
+func (v *Value) ToJSON() (json.RawMessage, error) {
+	c, err := json.Marshal(v)
+	if err != nil {
+		return nil, err
+	}
+	return json.RawMessage(c), nil
+}
+
+// FromJSON populates the s with the data from RawMessage
+func (v *Value) FromJSON(rawmessage json.RawMessage) error {
+	return json.Unmarshal(rawmessage, &v)
 }
 
 // insert implements the INSERT action.
@@ -217,3 +232,6 @@ func (v *Value) copymap(params ...interface{}) (interface{}, error) {
 	}
 	return out, nil
 }
+
+// Interface guard.
+var _ kiwi.Value = (*Value)(nil)
