@@ -65,10 +65,10 @@ const (
 	// Returns an array of removed elements.
 	Remove kiwi.Action = "REMOVE"
 
-	// Update increments or decrements the score by given value.
+	// Increment increments the score by given value.
 	//
 	// Returns updated score.
-	Update kiwi.Action = "UPDATE"
+	Increment kiwi.Action = "INCREMENT"
 
 	// Len gets the length of the zset.
 	//
@@ -101,13 +101,13 @@ func (v *Value) Type() kiwi.ValueType {
 // DoMap returns the map of v's actions with it's do functions.
 func (v *Value) DoMap() map[kiwi.Action]kiwi.DoFunc {
 	return map[kiwi.Action]kiwi.DoFunc{
-		Insert:  v.insert,
-		Remove:  v.remove,
-		Update:  v.update,
-		Len:     v.len,
-		Get:     v.get,
-		PeekMax: v.peekmax,
-		PeekMin: v.peekmin,
+		Insert:    v.insert,
+		Remove:    v.remove,
+		Increment: v.increment,
+		Len:       v.len,
+		Get:       v.get,
+		PeekMax:   v.peekmax,
+		PeekMin:   v.peekmin,
 	}
 }
 
@@ -161,8 +161,8 @@ func (v *Value) remove(params ...interface{}) (interface{}, error) {
 	return out, nil
 }
 
-// update implements the UPDATE action.
-func (v *Value) update(params ...interface{}) (interface{}, error) {
+// increment implements the INCREMENT action.
+func (v *Value) increment(params ...interface{}) (interface{}, error) {
 	if len(params) != 2 {
 		return nil, newParamLenErr(len(params), 2)
 	}

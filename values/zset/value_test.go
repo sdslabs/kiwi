@@ -59,7 +59,7 @@ func TestZset_Insert(t *testing.T) {
 	}
 }
 
-func TestZset_Update(t *testing.T) {
+func TestZset_Increment(t *testing.T) {
 	store, err := newTestStore()
 	if err != nil {
 		t.Fatalf("couldn't create store: %v", err)
@@ -70,53 +70,63 @@ func TestZset_Update(t *testing.T) {
 	// to insert the zset into the store
 	testInsertZsetHelper(store, testVals, t)
 
-	v, err := store.Do(testKey, Update, "a", 10)
+	v, err := store.Do(testKey, Increment, "a", 10)
 	if err != nil {
-		t.Errorf("could not update %q to zset: %v", "a", err)
+		t.Errorf("could not increment %q to zset: %v", "a", err)
 	}
 
 	sc, ok := v.(int)
 	if !ok {
-		t.Errorf("Update did not return int rather got %T", v)
+		t.Errorf("Increment did not return int rather got %T", v)
 	}
 
 	if sc != 10 {
 		t.Errorf("expected %d; got %d", 10, sc)
 	}
 
-	// trying to update with negative value
-	v, err = store.Do(testKey, Update, "a", -5)
+	// trying to increment with negative value
+	v, err = store.Do(testKey, Increment, "a", -5)
 	if err != nil {
-		t.Errorf("could not update %q to zset: %v", "a", err)
+		t.Errorf("could not increment %q to zset: %v", "a", err)
 	}
 
 	sc, ok = v.(int)
 	if !ok {
-		t.Errorf("Update did not return int rather got %T", v)
+		t.Errorf("Increment did not return int rather got %T", v)
 	}
 
 	if sc != 5 {
 		t.Errorf("expected %d; got %d", 5, sc)
 	}
 
-	// trying to update with invalid parameter type
-	_, err = store.Do(testKey, Insert, 123, 10)
+	// trying to increment with invalid parameter type
+	_, err = store.Do(testKey, Increment, 123, 10)
 	if err == nil {
-		t.Errorf("expected error; got nil while inserting with integer")
+		t.Errorf("expected error; got nil while incrementing with integer")
 	}
 
 	if er := errors.Unwrap(err); er != ErrInvalidParamType {
-		t.Errorf("expected ErrInvalidParamType while inserting with integer; got %v", err)
+		t.Errorf("expected ErrInvalidParamType while incrementing with integer; got %v", err)
 	}
 
 	// trying with invalid number of parameters
-	_, err = store.Do(testKey, Insert)
+	_, err = store.Do(testKey, Increment)
 	if err == nil {
 		t.Errorf("expected error; got nil while inserting with invalid number of params (0)")
 	}
 
 	if er := errors.Unwrap(err); er != ErrInvalidParamLen {
-		t.Errorf("expected ErrInvalidParamLen while inserting with 0 parameters; got %v", err)
+		t.Errorf("expected ErrInvalidParamLen while incrementing with 0 parameters; got %v", err)
+	}
+
+	// trying to increment invalid value (which is not present)
+	_, err = store.Do(testKey, Increment, "z", 10)
+	if err == nil {
+		t.Errorf("expected error; got nil while incrementing with invalid value")
+	}
+
+	if er := errors.Unwrap(err); er != ErrInvalidParamValue {
+		t.Errorf("expected ErrInvalidParamValue while incrementing with param which is not present; got %v", err)
 	}
 }
 
@@ -281,15 +291,15 @@ func TestZset_PeekMax(t *testing.T) {
 	// to insert the zset into the store
 	testInsertZsetHelper(store, testVals, t)
 
-	// Updating scores to some non-zero values
-	_, err = store.Do(testKey, Update, "a", 10)
+	// Incrementing scores by some non-zero values
+	_, err = store.Do(testKey, Increment, "a", 10)
 	if err != nil {
-		t.Errorf("could not update %q to zset: %v", "a", err)
+		t.Errorf("could not increment %q to zset: %v", "a", err)
 	}
 
-	_, err = store.Do(testKey, Update, "c", -10)
+	_, err = store.Do(testKey, Increment, "c", -10)
 	if err != nil {
-		t.Errorf("could not update %q to zset: %v", "c", err)
+		t.Errorf("could not increment %q to zset: %v", "c", err)
 	}
 
 	v, err := store.Do(testKey, PeekMax)
@@ -328,15 +338,15 @@ func TestZset_PeekMin(t *testing.T) {
 	// to insert the zset into the store
 	testInsertZsetHelper(store, testVals, t)
 
-	// Updating scores to some non-zero values
-	_, err = store.Do(testKey, Update, "a", 10)
+	// Incrementing scores by some non-zero values
+	_, err = store.Do(testKey, Increment, "a", 10)
 	if err != nil {
-		t.Errorf("could not update %q to zset: %v", "a", err)
+		t.Errorf("could not increment %q to zset: %v", "a", err)
 	}
 
-	_, err = store.Do(testKey, Update, "c", -10)
+	_, err = store.Do(testKey, Increment, "c", -10)
 	if err != nil {
-		t.Errorf("could not update %q to zset: %v", "c", err)
+		t.Errorf("could not increment %q to zset: %v", "c", err)
 	}
 
 	v, err := store.Do(testKey, PeekMin)

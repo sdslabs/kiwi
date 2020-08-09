@@ -39,12 +39,12 @@ func TestZSet(t *testing.T) {
 
 	// updating score to some non zero values.
 
-	if err = s.Update("a", 5); err != nil {
-		t.Errorf("could not Update: %v", err)
+	if err = s.Increment("a", 5); err != nil {
+		t.Errorf("could not increment: %v", err)
 	}
 
-	if err = s.Update("f", -5); err != nil {
-		t.Errorf("could not Update: %v", err)
+	if err = s.Increment("f", -5); err != nil {
+		t.Errorf("could not Increment: %v", err)
 	}
 
 	score, err := s.Get("b")

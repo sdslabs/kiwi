@@ -58,9 +58,9 @@ func (z *Zset) Remove(elements ...string) error {
 	return nil
 }
 
-// Update updates the score of element of the zset.
-func (z *Zset) Update(element string, score int) error {
-	if _, err := z.store.Do(z.key, zset.Update, element, score); err != nil {
+// Increment increment the score of element of the zset.
+func (z *Zset) Increment(element string, score int) error {
+	if _, err := z.store.Do(z.key, zset.Increment, element, score); err != nil {
 		return err
 	}
 
