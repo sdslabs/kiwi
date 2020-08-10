@@ -48,7 +48,7 @@ These types include:
 - [x] list (`github.com/sdslabs/kiwi/values/list`): A list of strings
 - [x] set (`github.com/sdslabs/kiwi/values/set`): An exclusive set of strings
 - [x] hash (`github.com/sdslabs/kiwi/values/hash`): A string-string hashmap
-- [ ] zset (TODO): A set with each element having scores
+- [x] zset (`github.com/sdslabs/kiwi/values/zset`): A set with each element having scores
 
 If you only require the aforementioned value types, use the `stdkiwi` package.
 The above example using the `stdkiwi` package is as follows:
