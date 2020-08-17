@@ -163,7 +163,7 @@ func (s *Store) Do(key string, action Action, params ...interface{}) (interface{
 	return res, err
 }
 
-// ToJSON executes the action of converting for the value associated with the key into raw byte array.
+// ToJSON converts the data associated with the value into JSON format.
 func (s *Store) ToJSON(key string) (json.RawMessage, error) {
 	if err := s.keyExists(key); err != nil {
 		return nil, err
@@ -184,7 +184,7 @@ func (s *Store) ToJSON(key string) (json.RawMessage, error) {
 	return res, nil
 }
 
-// FromJSON executes the action of converting the raw byte array for the value associated with the key into proper format.
+// FromJSON takes the raw JSON form of data and loads it into the value.
 func (s *Store) FromJSON(key string, rawmessage json.RawMessage) error {
 	if err := s.keyExists(key); err != nil {
 		return err
@@ -199,6 +199,138 @@ func (s *Store) FromJSON(key string, rawmessage json.RawMessage) error {
 
 	if err := v.val.FromJSON(rawmessage); err != nil {
 		return fmt.Errorf("error in FromJSON: %v", err)
+	}
+
+	return nil
+}
+
+// ValJSON is the JSON object for each value.
+type ValJSON struct {
+	Type string          `json:"type"`
+	Data json.RawMessage `json:"data"`
+}
+
+// StoreJSON is the type which includes all the data for the store.
+type StoreJSON = map[string]ValJSON
+
+// Export returns JSON data for the store.
+//
+// The data is in the format (StoreJSON):
+//
+// 	{
+// 		"key_1": {
+// 			"type": "str",
+// 			"data": "hello"
+// 		},
+// 		"key_2": {
+// 			"type": "hash",
+// 			"data": {
+// 				"a": "b",
+// 				"c": "d"
+// 			}
+// 		}
+// 	}
+//
+func (s *Store) Export() (json.RawMessage, error) {
+	schema := s.GetSchema()
+	sjson := make(StoreJSON, len(schema))
+
+	for k, v := range s.GetSchema() {
+		data, err := s.ToJSON(k)
+		if err != nil {
+			return nil, fmt.Errorf("error exporting for %q key: %v", k, err)
+		}
+		sjson[k] = ValJSON{
+			Type: string(v),
+			Data: data,
+		}
+	}
+
+	c, err := json.Marshal(sjson)
+	if err != nil {
+		return nil, err
+	}
+
+	return json.RawMessage(c), nil
+}
+
+// ImportOpts are the options that can be used to configure how to import
+// data into the store from raw JSON.
+type ImportOpts struct {
+	// AddKeys specifies whether to add keys that do not exist.
+	AddKeys bool
+
+	// UpdateTypes specifies if the type of key in JSON doesn't match the one
+	// with already-defined key, should the type of key be updated or not.
+	UpdateTypes bool
+
+	// ErrOnInvalidKey specifies whether to throw error if the key in the JSON
+	// does not exist in the actual schema of the Store.
+	// This option is considered only when `AddKeys` is false.
+	ErrOnInvalidKey bool
+}
+
+// Import loads store from the data.
+//
+// The default behavior is that the store takes the data from the JSON and
+// if an unknown key exists, i.e., a key that is not already added to the
+// store, it silently skips the value associated with it. This can be
+// configured using the ImportOpts.
+//
+// The data is in the format (StoreJSON):
+//
+// 	{
+// 		"key_1": {
+// 			"type": "str",
+// 			"data": "hello"
+// 		},
+// 		"key_2": {
+// 			"type": "hash",
+// 			"data": {
+// 				"a": "b",
+// 				"c": "d"
+// 			}
+// 		}
+// 	}
+//
+func (s *Store) Import(rawmessage json.RawMessage, opts ImportOpts) error {
+	var sjson StoreJSON
+	if err := json.Unmarshal(rawmessage, &sjson); err != nil {
+		return err
+	}
+
+	for k := range sjson {
+		if err := s.keyExists(k); err != nil {
+			if !opts.AddKeys && !opts.ErrOnInvalidKey {
+				continue
+			}
+			if !opts.AddKeys && opts.ErrOnInvalidKey {
+				return err
+			}
+			if opts.AddKeys {
+				if er := s.AddKey(k, ValueType(sjson[k].Type)); er != nil {
+					return er
+				}
+			}
+		}
+
+		valType, err := s.GetValueType(k)
+		if err != nil {
+			return err
+		}
+
+		if sjson[k].Type != string(valType) {
+			if !opts.UpdateTypes {
+				return fmt.Errorf("value type in JSON and store schema do not match")
+			}
+			if er := s.UpdateKey(k, ValueType(sjson[k].Type)); er != nil {
+				return er
+			}
+		}
+
+		if err := s.FromJSON(k, sjson[k].Data); err != nil {
+			return err
+		}
 	}
 
 	return nil
