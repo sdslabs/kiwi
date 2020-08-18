@@ -60,7 +60,7 @@ func main() {
     panic(err)
   }
 
-    fmt.Println(str) // Hello, World!
+  fmt.Println(str) // Hello, World!
 }
 ```
 
@@ -102,8 +102,8 @@ func main() {
 ```
 
 ::: warning Use stdkiwi
-Using `stdkiwi` is preffered method if you don't need any other data types
+Using `stdkiwi` is preferred method if you don't need any other data types
 other than the standard value types. This is because `stdkiwi` defines many
-types corresponding to the standard value types, like `stdkiwi.Str` for example.
-Actions corresponding to these types are defined as type safe methods.
+types corresponding to the standard value types, like `stdkiwi.Str`. Actions
+corresponding to these types are defined as type safe methods.
 :::

@@ -2,7 +2,7 @@
 home: true
 heroImage: /sdslabs-logo.png
 tagline: A minimalistic in-memory key value store.
-actionText: Dive Into Docs →
+actionText: Get Started →
 actionLink: /docs/
 features:
 - title: Extendable
@@ -25,7 +25,7 @@ if err := store.AddKey("my_string", "str"); err != nil {
 
 myString := store.Str("my_string")
 
-if err := myString.Update("hello"); err != nil {
+if err := myString.Update("Hello, World!"); err != nil {
   // handle error
 }
 
@@ -33,4 +33,6 @@ str, err := myString.Get()
 if err != nil {
   // handle error
 }
+
+fmt.Println(str) // Hello, World!
 ```
