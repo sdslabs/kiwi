@@ -53,6 +53,16 @@ module.exports = {
             '',
             'get-started',
           ]
+        },
+        {
+          title: 'Tutorial',
+          collapsable: false,
+          children: [
+            'tutorial-store',
+            'tutorial-value-and-actions',
+            'tutorial-stdkiwi',
+            'tutorial-json'
+          ]
         }
       ],
     }

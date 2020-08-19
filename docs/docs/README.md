@@ -5,11 +5,6 @@ comes in helpful when you need to manage state accross your application which
 can be mutated with multiple threads. Kiwi protects your keys with mutex locks
 so you don't have to.
 
-::: danger Beware when using Kiwi
-Kiwi is a Go library, i.e., builds into the project. It should not be used when
-you need a consistent state across multiple services.
-:::
-
 Though the above paragraph gives a gist about what Kiwi is, it's much more
 than just "global variables".
 
