@@ -1,4 +1,4 @@
-# JSON
+# Import and export
 
 Now that we have explored how to use Kiwi, there's just one final feature
 that we should get familiar with. All Kiwi values are compatible with JSON,

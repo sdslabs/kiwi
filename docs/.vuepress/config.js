@@ -63,6 +63,15 @@ module.exports = {
             'tutorial-stdkiwi',
             'tutorial-json'
           ]
+        },
+        {
+          title: 'Concepts',
+          collapsable: false,
+          children: [
+            'concepts-store',
+            'concepts-values',
+            'concepts-stdkiwi'
+          ]
         }
       ],
     }

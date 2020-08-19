@@ -1,4 +1,4 @@
-# Std Kiwi
+# Standard Kiwi
 
 We have the school name but we want to keep a list of students. Not only
 that but we need to store each student's ID. Each student may or may not

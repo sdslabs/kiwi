@@ -1,4 +1,4 @@
-# Store
+# Your first store
 
 In this tutorial we will learn how to use Kiwi by creating an app to keep
 a track of students in a school.
