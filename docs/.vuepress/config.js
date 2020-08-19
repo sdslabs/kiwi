@@ -72,6 +72,13 @@ module.exports = {
             'concepts-values',
             'concepts-stdkiwi'
           ]
+        },
+        {
+          title: 'Advanced',
+          collapsable: false,
+          children: [
+            'add-new-value-type'
+          ]
         }
       ],
     }
