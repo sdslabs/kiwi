@@ -46,26 +46,21 @@ a key that stores the name of the school.
 ## Adding key
 
 Each value associated with a key in Kiwi has a type. In this case we need a
-string to store the name of the school.
+string to store the name of the school. But before we create a string key
+we need to tell Kiwi about the string value type. Fortunately, it's just one
+line. Simply import the `github/sdslabs/kiwi/values/str` package:
+
+```go
+import _ "github.com/sdslabs/kiwi/values/str"
+```
+
+And now we can add a string key in our program:
 
 ```go
 if err := store.AddKey("school_name", "str"); err != nil {
   panic(err)
 }
 ```
-
-::: danger Error
-This program will not work because Kiwi won't recognize the `"str"` value type.
-
-Luckily, telling Kiwi about the `"str"` type, or any other type as a matter
-of fact, is very easy. We just need to add the following import:
-
-```go
-import _ "github.com/sdslabs/kiwi/values/str"
-```
-
-This tells Kiwi what the `"str"` value type is and what it does.
-:::
 
 ***
 

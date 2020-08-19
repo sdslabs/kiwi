@@ -70,21 +70,20 @@ package main
 
 import (
   "encoding/json"
-	"fmt"
+  "fmt"
 
   "github.com/sdslabs/kiwi"
   "github.com/sdslabs/kiwi/stdkiwi"
-  "github.com/sdslabs/kiwi/values/str"
-  "github.com/sdslabs/kiwi/values/hash"
 )
 
 func main() {
-  schema := kiwi.Schema{
-    "school_name": str.Type,
-    "students":    hash.Type,
+  store := stdkiwi.NewStore()
+
+  if err := store.AddKey("school_name", "str"); err != nil {
+    panic(err)
   }
-  store, err := stdkiwi.NewStoreFromSchema(schema)
-  if err != nil {
+
+  if err := store.AddKey("students", "hash"); err != nil {
     panic(err)
   }
 
@@ -107,7 +106,7 @@ func main() {
     panic(err)
   }
 
-  _, err = store.Do("school_name", str.Update, "My School Name")
+  _, err = store.Do("school_name", "UPDATE", "My School Name")
   if err != nil {
     panic(err)
   }

@@ -4,7 +4,7 @@ So far we have created a store and added a key inside it which has a value
 of type string (or `"str"`). Now we'll update the value corresponding with
 our key.
 
-## `Do`ing
+## Do
 
 In Kiwi, anything that is to be "done" with the value is invoked through
 the `Do` method of the store. The thing that invokes a particular behaviour
@@ -23,24 +23,12 @@ if err != nil {
 }
 ```
 
-::: warning Exploit everything
-Using strings as actions can lead to unexpected errors. Each value type in
-`github.com/sdslabs/kiwi/values` declares constants that can be used instead
-of writing strings for actions (and even type names).
-
-So the above code will look like:
-
-```go
-_, err := store.Do("school_name", str.Update, "My School Name")
-```
-:::
-
-## Verifying
+## Verify
 
 To check if the key was updated, we can use the GET action.
 
 ```go
-v, err := store.Do("school_name", str.Get)
+v, err := store.Do("school_name", "GET")
 if err != nil {
   panic(err)
 }
@@ -60,22 +48,22 @@ import (
   "fmt"
 
   "github.com/sdslabs/kiwi"
-  "github.com/sdslabs/kiwi/values/str"
+  _ "github.com/sdslabs/kiwi/values/str"
 )
 
 func main() {
   store := kiwi.NewStore()
 
-  if err := store.AddKey("school_name", str.Type); err != nil {
+  if err := store.AddKey("school_name", "str"); err != nil {
     panic(err)
   }
 
-  _, err := store.Do("school_name", str.Update, "My School Name")
+  _, err := store.Do("school_name", "UPDATE", "My School Name")
   if err != nil {
     panic(err)
   }
 
-  v, err := store.Do("school_name", str.Get)
+  v, err := store.Do("school_name", "GET")
   if err != nil {
     panic(err)
   }

@@ -11,35 +11,18 @@ students IDs corresponding to their names in a hash map.
 
 ```go
 // Imports
-import "github.com/sdslabs/kiwi/values/hash"
+import _ "github.com/sdslabs/kiwi/values/hash"
 
 // Main
-if err := store.AddKey("students", hash.Type); err != nil {
+if err := store.AddKey("students", "hash"); err != nil {
   panic(err)
 }
 ```
 
-::: tip Note
-When schema of the store is known, we can create the store by defining a
-schema:
+### Add student
 
 ```go
-schema := kiwi.Schema{
-  "school_name": str.Type,
-  "students":    hash.Type,
-}
-
-store, err := kiwi.NewStoreFromSchema(schema)
-if err != nil {
-  panic(err)
-}
-```
-:::
-
-### Add and delete students
-
-```go
-_, err := store.Do("students", hash.Insert, 123, "SDSLabs")
+_, err := store.Do("students", "INSERT", 123, "SDSLabs")
 if err != nil {
   panic(err)
 }
@@ -103,23 +86,21 @@ if err := students.Insert("123", "SDSLabs"); err != nil {
 package main
 
 import (
-  "github.com/sdslabs/kiwi"
   "github.com/sdslabs/kiwi/stdkiwi"
-  "github.com/sdslabs/kiwi/values/str"
-  "github.com/sdslabs/kiwi/values/hash"
 )
 
 func main() {
-  schema := kiwi.Schema{
-    "school_name": str.Type,
-    "students":    hash.Type,
-  }
-  store, err := stdkiwi.NewStoreFromSchema(schema)
-  if err != nil {
+  store := stdkiwi.NewStore()
+
+  if err := store.AddKey("school_name", "str"); err != nil {
     panic(err)
   }
 
-  _, err = store.Do("school_name", str.Update, "My School Name")
+  if err := store.AddKey("students", "hash"); err != nil {
+    panic(err)
+  }
+
+  _, err = store.Do("school_name", "UPDATE", "My School Name")
   if err != nil {
     panic(err)
   }

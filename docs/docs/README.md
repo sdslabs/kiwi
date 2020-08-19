@@ -8,11 +8,6 @@ so you don't have to.
 Though the above paragraph gives a gist about what Kiwi is, it's much more
 than just "global variables".
 
-::: tip Idea
-Kiwi can be used as core for creating a complete key-value database like
-[Redis](https://redis.io/).
-:::
-
 ## How it works
 
 Kiwi creates a `store` which can be thought of as the centralized repository
