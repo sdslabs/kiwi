@@ -16,9 +16,9 @@ can take place on the `value` associated with the key.
 
 Let's take an example to understand what we mean by above paragraph:
 
-_Say, you have multiple servers with which your application interacts and you_
-_need to store their IP addresses (which are dynamic). So essentially you need_
-_a `set` of IP addresses where you can add or remove IP addresses._
+Say, you have multiple servers with which your application interacts and you
+need to store their IP addresses (which are dynamic). So essentially you need
+a `set` of IP addresses where you can add or remove IP addresses.
 
 ![How it works](./images/how-it-works-chart.jpg)
 

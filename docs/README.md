@@ -4,12 +4,12 @@ heroImage: /kiwi-logo.png
 actionText: Get Started →
 actionLink: /docs/
 features:
-- title: Extendable
-  details: Custom data structures can be added with ease.
-- title: One Binary
+- title: Extendable types
+  details: Keys have static data types that can be plugged in with ease.
+- title: One binary
   details: Kiwi can be directly plugged in as a go library which produces one binary for your application.
-- title: In-Memory
-  details: All the data is stored in memory for fast access.
+- title: JSON compatible
+  details: Data can be imported from or exported to JSON very comfortably.
 footer: MIT Licensed | Copyright © 2020 SDSLabs
 ---
 
