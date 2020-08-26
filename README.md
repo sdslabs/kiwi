@@ -59,13 +59,15 @@ We are always open for contributions. If you find any feature missing, or just
 want to report a bug, feel free to open an issue and/or submit a pull request
 regarding the same.
 
-<!-- TODO: Upate link once the contribution docs are complete -->
-For more information on contribution, check out our [docs](https://kiwi.sdslabs.co/docs/).
+For more information on contribution, check out our
+[docs](https://kiwi.sdslabs.co/docs/contribution-guide.html).
 
 ## Contact
 
 If you have a query regarding the product or just want to say hello then feel
 free to visit [chat.sdslabs.co](https://chat.sdslabs.co) or drop a mail at
 [contact@sdslabs.co.in](mailto:contact@sdslabs.co.in)
+
+---
 
 Made by [SDSLabs](https://sdslabs.co)
