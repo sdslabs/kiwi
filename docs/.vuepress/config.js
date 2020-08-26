@@ -40,7 +40,7 @@ module.exports = {
         link: '/docs/',
       },
       {
-        text: 'Go Reference',
+        text: 'pkg.go.dev',
         link: 'https://pkg.go.dev/github.com/sdslabs/kiwi'
       },
     ],
@@ -78,6 +78,13 @@ module.exports = {
           collapsable: false,
           children: [
             'add-new-value-type'
+          ]
+        },
+        {
+          title: 'Developer',
+          collapsable: false,
+          children: [
+            'contribution-guide'
           ]
         }
       ],
