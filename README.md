@@ -2,6 +2,8 @@
 
 > A minimalistic in-memory key value store.
 
+![Go CI](https://github.com/sdslabs/kiwi/workflows/Go%20CI/badge.svg) ![Docs CI](https://github.com/sdslabs/kiwi/workflows/Docs%20CI/badge.svg) ![Docs CD](https://github.com/sdslabs/kiwi/workflows/Docs%20CD/badge.svg) 
+
 ## Overview
 
 You can think of Kiwi as thread safe global variables. This kind of library
