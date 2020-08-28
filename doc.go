@@ -13,4 +13,28 @@
 //
 // Store can also be initialized with a schema, which is basically a map of keys
 // and value types.
+//
+//
+// Get Started
+//
+// Create a store, add key and play with it. It's that easy!
+//
+//	store := kiwi.NewStore()
+//
+//	if err := store.AddKey("my_string", "str"); err != nil {
+//	  // handle error
+//	}
+//
+//	if _, err := store.Do("my_string", "UPDATE", "Hello, World!"); err != nil {
+//	  // handle error
+//	}
+//
+//	v, err := store.Do("my_string", "GET")
+//	if err != nil {
+//	  // handle error
+//	}
+//
+//	fmt.Println(v.(string)) // Hello, World!
+//
+// For documentation visit https://kiwi.sdslabs.co/docs/
 package kiwi
