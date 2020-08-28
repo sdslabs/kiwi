@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Store | Kiwi</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <meta name="description" content="A minimalistic in-memory key value store">
+    <meta name="theme-color" content="#A1CE48">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="preload" href="/assets/css/0.styles.8d978ec2.css" as="style"><link rel="preload" href="/assets/js/app.059c53c9.js" as="script"><link rel="preload" href="/assets/js/2.eae65576.js" as="script"><link rel="preload" href="/assets/js/12.4651365d.js" as="script"><link rel="prefetch" href="/assets/js/10.dc11a8e9.js"><link rel="prefetch" href="/assets/js/11.88b951c3.js"><link rel="prefetch" href="/assets/js/13.501340cf.js"><link rel="prefetch" href="/assets/js/14.4f9b2b2d.js"><link rel="prefetch" href="/assets/js/15.6f6d225c.js"><link rel="prefetch" href="/assets/js/16.6cd18fbe.js"><link rel="prefetch" href="/assets/js/17.48043ac3.js"><link rel="prefetch" href="/assets/js/18.0a018aaa.js"><link rel="prefetch" href="/assets/js/19.456c2777.js"><link rel="prefetch" href="/assets/js/3.26546bd2.js"><link rel="prefetch" href="/assets/js/4.94ee9fb4.js"><link rel="prefetch" href="/assets/js/5.cf962203.js"><link rel="prefetch" href="/assets/js/6.5b90f635.js"><link rel="prefetch" href="/assets/js/7.f38b3819.js"><link rel="prefetch" href="/assets/js/8.9ffa6a8c.js"><link rel="prefetch" href="/assets/js/9.df0f14f4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.8d978ec2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Kiwi</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">
+  Documentation
+</a></div><div class="nav-item"><a href="https://pkg.go.dev/github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  pkg.go.dev
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">
+  Documentation
+</a></div><div class="nav-item"><a href="https://pkg.go.dev/github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  pkg.go.dev
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Welcome</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/" aria-current="page" class="sidebar-link">Introduction</a></li><li><a href="/docs/get-started.html" class="sidebar-link">Get Started</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Tutorial</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/tutorial-store.html" class="sidebar-link">Your first store</a></li><li><a href="/docs/tutorial-value-and-actions.html" class="sidebar-link">Value and actions</a></li><li><a href="/docs/tutorial-stdkiwi.html" class="sidebar-link">Standard Kiwi</a></li><li><a href="/docs/tutorial-json.html" class="sidebar-link">Import and export</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Concepts</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/concepts-store.html" aria-current="page" class="active sidebar-link">Store</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/concepts-store.html#create-new-store" class="sidebar-link">Create new store</a></li><li class="sidebar-sub-header"><a href="/docs/concepts-store.html#add-update-and-remove-keys" class="sidebar-link">Add, update and remove keys</a></li><li class="sidebar-sub-header"><a href="/docs/concepts-store.html#schema" class="sidebar-link">Schema</a></li><li class="sidebar-sub-header"><a href="/docs/concepts-store.html#import-and-export" class="sidebar-link">Import and export</a></li></ul></li><li><a href="/docs/concepts-values.html" class="sidebar-link">Values</a></li><li><a href="/docs/concepts-stdkiwi.html" class="sidebar-link">Stdkiwi</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Advanced</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/add-new-value-type.html" class="sidebar-link">Add new value type</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Developer</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/contribution-guide.html" class="sidebar-link">Contribution guide</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="store"><a href="#store" class="header-anchor">#</a> Store</h1> <p>Store is the entry point for interacting with the values. A store protects
+values when they are being used via multiple threads.</p> <h2 id="create-new-store"><a href="#create-new-store" class="header-anchor">#</a> Create new store</h2> <p>The simplest way to create a new store is to use <code>NewStore</code> function.
+This creates an empty store and add/remove keys from it.</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">import</span> <span class="token string">&quot;github.com/sdslabs/kiwi&quot;</span>
+
+<span class="token comment">// ...</span>
+
+store <span class="token operator">:=</span> kiwi<span class="token punctuation">.</span><span class="token function">NewStore</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="add-update-and-remove-keys"><a href="#add-update-and-remove-keys" class="header-anchor">#</a> Add, update and remove keys</h2> <p>A key can be added to the store using <code>AddKey</code> method. If the key already
+exists, <code>AddKey</code> will return a non-nil error.</p> <p><code>UpdateKey</code> updates the value type of the key. If the key does not exist,
+it returns a non-nil error. Calling update deletes the old value irrespective
+of if the value type is same or not.</p> <p>A key can be removed using <code>DeleteKey</code> method. This also returns a non-nil
+error when the key does not exist.</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">import</span> <span class="token punctuation">(</span>
+  <span class="token string">&quot;github.com/sdslabs/kiwi&quot;</span>
+
+  <span class="token comment">// Value types</span>
+  <span class="token string">&quot;github.com/sdslabs/kiwi/values/hash&quot;</span>
+  <span class="token string">&quot;github.com/sdslabs/kiwi/values/str&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token keyword">if</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">AddKey</span><span class="token punctuation">(</span><span class="token string">&quot;my_key&quot;</span><span class="token punctuation">,</span> str<span class="token punctuation">.</span>Type<span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span> <span class="token comment">// str.Type = &quot;str&quot;</span>
+  <span class="token comment">// handle error</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">if</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">UpdateKey</span><span class="token punctuation">(</span><span class="token string">&quot;my_key&quot;</span><span class="token punctuation">,</span> hash<span class="token punctuation">.</span>Type<span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span> <span class="token comment">// hash.Type = &quot;hash&quot;</span>
+  <span class="token comment">// handle error</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">if</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">DeleteKey</span><span class="token punctuation">(</span><span class="token string">&quot;my_key&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  <span class="token comment">// handle error</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="schema"><a href="#schema" class="header-anchor">#</a> Schema</h2> <p>Most of the times a schema is known for the store. A store can be created
+with this schema itself.</p> <p><code>Schema</code> type is a map of keys v/s their value types. To create a store,
+<code>NewStoreFromSchema</code> can be used:</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">import</span> <span class="token punctuation">(</span>
+  <span class="token string">&quot;github.com/sdslabs/kiwi&quot;</span>
+
+  <span class="token comment">// Value types</span>
+  <span class="token string">&quot;github.com/sdslabs/kiwi/values/hash&quot;</span>
+  <span class="token string">&quot;github.com/sdslabs/kiwi/values/str&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// ...</span>
+
+schema <span class="token operator">:=</span> kiwi<span class="token punctuation">.</span>Schema<span class="token punctuation">{</span>
+  <span class="token string">&quot;my_string&quot;</span><span class="token punctuation">:</span> str<span class="token punctuation">.</span>Type<span class="token punctuation">,</span>
+  <span class="token string">&quot;my_hash&quot;</span><span class="token punctuation">:</span>   hash<span class="token punctuation">.</span>Type<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+store<span class="token punctuation">,</span> err <span class="token operator">:=</span> kiwi<span class="token punctuation">.</span><span class="token function">NewStoreFromSchema</span><span class="token punctuation">(</span>schema<span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  <span class="token comment">// handle error</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>The above example is equivalent to creating a new empty store and calling
+<code>AddKey</code> twice.</p> <p>For any store, you can also get the schema using <code>GetSchema</code> method.</p> <h1 id="interact-with-values"><a href="#interact-with-values" class="header-anchor">#</a> Interact with values</h1> <p>To mutate or read data associated with the keys, use <code>Do</code> method of the store.
+It takes two parameters, one is the key name and the other is the kind of
+action to be invoked.</p> <p>Let's say we need to check if a string exists in a set. Value type <code>&quot;set&quot;</code> (in
+the package <code>github.com/sdslabs/kiwi/values/set</code>) defines an action called
+<strong>HAS</strong> to check if the value exists.</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">import</span> <span class="token punctuation">(</span>
+  <span class="token string">&quot;fmt&quot;</span>
+
+  <span class="token string">&quot;github.com/sdslabs/kiwi&quot;</span>
+
+  <span class="token comment">// Value types</span>
+  <span class="token string">&quot;github.com/sdslabs/kiwi/values/set&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// ...</span>
+
+v<span class="token punctuation">,</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">Do</span><span class="token punctuation">(</span><span class="token string">&quot;my_key&quot;</span><span class="token punctuation">,</span> set<span class="token punctuation">.</span>Has<span class="token punctuation">,</span> <span class="token string">&quot;some_string&quot;</span><span class="token punctuation">)</span> <span class="token comment">// set.Has = &quot;HAS&quot;</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  <span class="token comment">// occurance of error here means `Do` failed due to invalid code</span>
+<span class="token punctuation">}</span>
+
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">bool</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// HAS action returns a boolean</span>
+</code></pre></div><p><code>Do</code> returns two values. First being the interface that carries any data
+associated with the action. Like in the aforementioned code, HAS returns a
+boolean. The second is the error which can occur in cases when:</p> <ol><li>The key is invalid</li> <li>The action is not defined for the value type</li> <li>Type or number of parameters is wrong</li></ol> <p>Another kind of interaction can be to get the data from values in JSON format
+or load the value from JSON. This can be done using the <code>ToJSON</code> and <code>FromJSON</code>
+methods of the store.</p> <p>More on values in the <a href="/docs/concepts-values.html">next concept</a>.</p> <h2 id="import-and-export"><a href="#import-and-export" class="header-anchor">#</a> Import and export</h2> <p>Data from the store can be exported into JSON or imported from JSON using
+the <code>Export</code> and <code>Import</code> methods respectively.</p> <p>The JSON format required is as follows:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;key_one&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;str&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;my string&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;key_two&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;hash&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;my&quot;</span><span class="token operator">:</span> <span class="token string">&quot;kiwi&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;hash&quot;</span><span class="token operator">:</span> <span class="token string">&quot;map&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>In the above JSON, the store has two keys: <code>&quot;key_one&quot;</code> and <code>&quot;key_two&quot;</code>. The
+values associated with these keys have types <code>&quot;str&quot;</code> and <code>&quot;hash&quot;</code> respectively.
+<code>&quot;data&quot;</code> contains the data correspondind to the keys.</p> <p>Type <code>StoreJSON</code> can be marshalled into the above format.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/sdslabs/kiwi/edit/master/docs/docs/concepts-store.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">8/28/2020, 9:35:49 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/docs/tutorial-json.html" class="prev">
+        Import and export
+      </a></span> <span class="next"><a href="/docs/concepts-values.html">
+        Values
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.059c53c9.js" defer></script><script src="/assets/js/2.eae65576.js" defer></script><script src="/assets/js/12.4651365d.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Values | Kiwi</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <meta name="description" content="A minimalistic in-memory key value store">
+    <meta name="theme-color" content="#A1CE48">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="preload" href="/assets/css/0.styles.8d978ec2.css" as="style"><link rel="preload" href="/assets/js/app.059c53c9.js" as="script"><link rel="preload" href="/assets/js/2.eae65576.js" as="script"><link rel="preload" href="/assets/js/13.501340cf.js" as="script"><link rel="prefetch" href="/assets/js/10.dc11a8e9.js"><link rel="prefetch" href="/assets/js/11.88b951c3.js"><link rel="prefetch" href="/assets/js/12.4651365d.js"><link rel="prefetch" href="/assets/js/14.4f9b2b2d.js"><link rel="prefetch" href="/assets/js/15.6f6d225c.js"><link rel="prefetch" href="/assets/js/16.6cd18fbe.js"><link rel="prefetch" href="/assets/js/17.48043ac3.js"><link rel="prefetch" href="/assets/js/18.0a018aaa.js"><link rel="prefetch" href="/assets/js/19.456c2777.js"><link rel="prefetch" href="/assets/js/3.26546bd2.js"><link rel="prefetch" href="/assets/js/4.94ee9fb4.js"><link rel="prefetch" href="/assets/js/5.cf962203.js"><link rel="prefetch" href="/assets/js/6.5b90f635.js"><link rel="prefetch" href="/assets/js/7.f38b3819.js"><link rel="prefetch" href="/assets/js/8.9ffa6a8c.js"><link rel="prefetch" href="/assets/js/9.df0f14f4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.8d978ec2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Kiwi</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">
+  Documentation
+</a></div><div class="nav-item"><a href="https://pkg.go.dev/github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  pkg.go.dev
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">
+  Documentation
+</a></div><div class="nav-item"><a href="https://pkg.go.dev/github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  pkg.go.dev
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Welcome</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/" aria-current="page" class="sidebar-link">Introduction</a></li><li><a href="/docs/get-started.html" class="sidebar-link">Get Started</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Tutorial</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/tutorial-store.html" class="sidebar-link">Your first store</a></li><li><a href="/docs/tutorial-value-and-actions.html" class="sidebar-link">Value and actions</a></li><li><a href="/docs/tutorial-stdkiwi.html" class="sidebar-link">Standard Kiwi</a></li><li><a href="/docs/tutorial-json.html" class="sidebar-link">Import and export</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Concepts</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/concepts-store.html" class="sidebar-link">Store</a></li><li><a href="/docs/concepts-values.html" aria-current="page" class="active sidebar-link">Values</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/concepts-values.html#pluggable-types" class="sidebar-link">Pluggable types</a></li><li class="sidebar-sub-header"><a href="/docs/concepts-values.html#actions" class="sidebar-link">Actions</a></li><li class="sidebar-sub-header"><a href="/docs/concepts-values.html#json" class="sidebar-link">JSON</a></li></ul></li><li><a href="/docs/concepts-stdkiwi.html" class="sidebar-link">Stdkiwi</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Advanced</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/add-new-value-type.html" class="sidebar-link">Add new value type</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Developer</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/contribution-guide.html" class="sidebar-link">Contribution guide</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="values"><a href="#values" class="header-anchor">#</a> Values</h1> <p>A value is associated with a key in a Kiwi store. Each value has a static
+type. For example, the store contains a key called <code>name</code> which should
+contain the name of the application. To store this we need a string value.
+Hence the key <code>name</code> will be associated with a value of type that stores
+string data.</p> <h2 id="pluggable-types"><a href="#pluggable-types" class="header-anchor">#</a> Pluggable types</h2> <p>Kiwi's type system is extendable, i.e., different value types can be plugged
+in as per requirement. Even the standard value types defined in the
+<a href="https://github.com/sdslabs/kiwi/values" target="_blank" rel="noopener noreferrer">values<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> package are implemented as
+third party types.</p> <p>So if you want to store a hashmap, the package
+<a href="https://pkg.go.dev/github.com/sdslabs/kiwi/values/hash" target="_blank" rel="noopener noreferrer">github.com/sdslabs/kiwi/values/hash<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>
+defines a Kiwi value type that can store data as a hash map. This can be plugged
+in simply by importing the package:</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">import</span> <span class="token boolean">_</span> <span class="token string">&quot;github.com/sdslabs/kiwi/values/hash&quot;</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token keyword">if</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">AddKey</span><span class="token punctuation">(</span><span class="token string">&quot;key_name&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;hash&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  <span class="token comment">// handle error</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="actions"><a href="#actions" class="header-anchor">#</a> Actions</h2> <p>A value can be interacted with using different actions. An action is nothing
+but a string telling the store about what to do with the value associated
+with the key you want to interact with.</p> <p>Each value type defines it's own actions. Say, you want to insert into the
+hash map, so you would <code>Do</code> an <code>&quot;INSERT&quot;</code> action.</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">Do</span><span class="token punctuation">(</span><span class="token string">&quot;key_name&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;INSERT&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;key&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;val&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  <span class="token comment">// handle error</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">Tip</p> <p>Each value type defined in the Kiwi package exposes actions and type names as
+constants. So rather than blank importing, you can import the complete package
+and use them such as:</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">import</span> <span class="token string">&quot;github.com/sdslabs/kiwi/values/hash&quot;</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token keyword">if</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">AddKey</span><span class="token punctuation">(</span><span class="token string">&quot;key_name&quot;</span><span class="token punctuation">,</span> hash<span class="token punctuation">.</span>Type<span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span> <span class="token comment">// hash.Type = &quot;hash&quot;</span>
+  <span class="token comment">// handle error</span>
+<span class="token punctuation">}</span>
+
+<span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">Do</span><span class="token punctuation">(</span><span class="token string">&quot;key_name&quot;</span><span class="token punctuation">,</span> hash<span class="token punctuation">.</span>Insert<span class="token punctuation">,</span> <span class="token string">&quot;key&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;val&quot;</span><span class="token punctuation">)</span> <span class="token comment">// hash.Insert = &quot;INSERT&quot;</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  <span class="token comment">// handle error</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <h2 id="json"><a href="#json" class="header-anchor">#</a> JSON</h2> <p>Each value is JSON compatible, i.e., they can be loaded from or converted
+into JSON. This property is what makes a store importable and exportable
+from and into JSON respectively.</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">import</span> <span class="token string">&quot;github.com/sdslabs/kiwi&quot;</span>
+
+<span class="token comment">// ...</span>
+
+jsonRawData<span class="token punctuation">,</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">ToJson</span><span class="token punctuation">(</span><span class="token string">&quot;my_key&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  <span class="token comment">// handle error</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">if</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">FromJSON</span><span class="token punctuation">(</span><span class="token string">&quot;my_key&quot;</span><span class="token punctuation">,</span> jsonRawData<span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  <span class="token comment">// handle error</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/sdslabs/kiwi/edit/master/docs/docs/concepts-values.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">8/28/2020, 9:35:49 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/docs/concepts-store.html" class="prev">
+        Store
+      </a></span> <span class="next"><a href="/docs/concepts-stdkiwi.html">
+        Stdkiwi
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.059c53c9.js" defer></script><script src="/assets/js/2.eae65576.js" defer></script><script src="/assets/js/13.501340cf.js" defer></script>
+  </body>
+</html>

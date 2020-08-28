@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Your first store | Kiwi</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <meta name="description" content="A minimalistic in-memory key value store">
+    <meta name="theme-color" content="#A1CE48">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="preload" href="/assets/css/0.styles.8d978ec2.css" as="style"><link rel="preload" href="/assets/js/app.059c53c9.js" as="script"><link rel="preload" href="/assets/js/2.eae65576.js" as="script"><link rel="preload" href="/assets/js/18.0a018aaa.js" as="script"><link rel="prefetch" href="/assets/js/10.dc11a8e9.js"><link rel="prefetch" href="/assets/js/11.88b951c3.js"><link rel="prefetch" href="/assets/js/12.4651365d.js"><link rel="prefetch" href="/assets/js/13.501340cf.js"><link rel="prefetch" href="/assets/js/14.4f9b2b2d.js"><link rel="prefetch" href="/assets/js/15.6f6d225c.js"><link rel="prefetch" href="/assets/js/16.6cd18fbe.js"><link rel="prefetch" href="/assets/js/17.48043ac3.js"><link rel="prefetch" href="/assets/js/19.456c2777.js"><link rel="prefetch" href="/assets/js/3.26546bd2.js"><link rel="prefetch" href="/assets/js/4.94ee9fb4.js"><link rel="prefetch" href="/assets/js/5.cf962203.js"><link rel="prefetch" href="/assets/js/6.5b90f635.js"><link rel="prefetch" href="/assets/js/7.f38b3819.js"><link rel="prefetch" href="/assets/js/8.9ffa6a8c.js"><link rel="prefetch" href="/assets/js/9.df0f14f4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.8d978ec2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Kiwi</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">
+  Documentation
+</a></div><div class="nav-item"><a href="https://pkg.go.dev/github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  pkg.go.dev
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">
+  Documentation
+</a></div><div class="nav-item"><a href="https://pkg.go.dev/github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  pkg.go.dev
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/sdslabs/kiwi" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Welcome</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/" aria-current="page" class="sidebar-link">Introduction</a></li><li><a href="/docs/get-started.html" class="sidebar-link">Get Started</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Tutorial</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/tutorial-store.html" aria-current="page" class="active sidebar-link">Your first store</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/tutorial-store.html#creating-project" class="sidebar-link">Creating project</a></li><li class="sidebar-sub-header"><a href="/docs/tutorial-store.html#new-store" class="sidebar-link">New store</a></li><li class="sidebar-sub-header"><a href="/docs/tutorial-store.html#adding-key" class="sidebar-link">Adding key</a></li><li class="sidebar-sub-header"><a href="/docs/tutorial-store.html#final-program" class="sidebar-link">Final program</a></li></ul></li><li><a href="/docs/tutorial-value-and-actions.html" class="sidebar-link">Value and actions</a></li><li><a href="/docs/tutorial-stdkiwi.html" class="sidebar-link">Standard Kiwi</a></li><li><a href="/docs/tutorial-json.html" class="sidebar-link">Import and export</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Concepts</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/concepts-store.html" class="sidebar-link">Store</a></li><li><a href="/docs/concepts-values.html" class="sidebar-link">Values</a></li><li><a href="/docs/concepts-stdkiwi.html" class="sidebar-link">Stdkiwi</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Advanced</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/add-new-value-type.html" class="sidebar-link">Add new value type</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Developer</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/contribution-guide.html" class="sidebar-link">Contribution guide</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="your-first-store"><a href="#your-first-store" class="header-anchor">#</a> Your first store</h1> <p>In this tutorial we will learn how to use Kiwi by creating an app to keep
+a track of students in a school.</p> <div class="custom-block tip"><p class="custom-block-title">Note</p> <p>This tutorial gives an overview of how to use Kiwi and does not focus on
+creating a multi-threaded application. Nevertheless, there is no difference
+in using Kiwi when dealing with multiple threads.</p></div> <h2 id="creating-project"><a href="#creating-project" class="header-anchor">#</a> Creating project</h2> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">mkdir</span> kiwi-example
+<span class="token builtin class-name">cd</span> kiwi-example
+</code></pre></div><p>Install Kiwi:</p> <div class="language-sh extra-class"><pre class="language-sh"><code>go get -u github.com/sdslabs/kiwi
+</code></pre></div><p>Create the main file (entry-point of our app): <code>main.go</code>:</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="new-store"><a href="#new-store" class="header-anchor">#</a> New store</h2> <p>All keys are accessed through the store. That's how we make sure every action
+is safe to access. So let's create our first store:</p> <div class="language-go extra-class"><pre class="language-go"><code>store <span class="token operator">:=</span> kiwi<span class="token punctuation">.</span><span class="token function">NewStore</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><p>That's it. Now you can add keys, update their values or use them. Let's add
+a key that stores the name of the school.</p> <h2 id="adding-key"><a href="#adding-key" class="header-anchor">#</a> Adding key</h2> <p>Each value associated with a key in Kiwi has a type. In this case we need a
+string to store the name of the school. But before we create a string key
+we need to tell Kiwi about the string value type. Fortunately, it's just one
+line. Simply import the <code>github/sdslabs/kiwi/values/str</code> package:</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">import</span> <span class="token boolean">_</span> <span class="token string">&quot;github.com/sdslabs/kiwi/values/str&quot;</span>
+</code></pre></div><p>And now we can add a string key in our program:</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">if</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">AddKey</span><span class="token punctuation">(</span><span class="token string">&quot;school_name&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;str&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><hr> <h2 id="final-program"><a href="#final-program" class="header-anchor">#</a> Final program</h2> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+  <span class="token string">&quot;github.com/sdslabs/kiwi&quot;</span>
+  <span class="token boolean">_</span> <span class="token string">&quot;github.com/sdslabs/kiwi/values/str&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  store <span class="token operator">:=</span> kiwi<span class="token punctuation">.</span><span class="token function">NewStore</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">if</span> err <span class="token operator">:=</span> store<span class="token punctuation">.</span><span class="token function">AddKey</span><span class="token punctuation">(</span><span class="token string">&quot;school_name&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;str&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/sdslabs/kiwi/edit/master/docs/docs/tutorial-store.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">8/28/2020, 9:35:49 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/docs/get-started.html" class="prev">
+        Get Started
+      </a></span> <span class="next"><a href="/docs/tutorial-value-and-actions.html">
+        Value and actions
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.059c53c9.js" defer></script><script src="/assets/js/2.eae65576.js" defer></script><script src="/assets/js/18.0a018aaa.js" defer></script>
+  </body>
+</html>
