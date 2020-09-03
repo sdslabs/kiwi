@@ -55,6 +55,9 @@ if err != nil {
 fmt.Println(str) // Hello, World!
 ```
 
+Check out the [tutorial](https://kiwi.sdslabs.co/docs/tutorial-store.html) to
+learn how to use Kiwi.
+
 ## Contributing
 
 We are always open for contributions. If you find any feature missing, or just
