@@ -113,6 +113,13 @@ func (s *Store) Zset(key string) *Zset {
 	}
 }
 
+func (s *Store) Zhash(key string) *Zhash {
+	return &Zhash{
+		store: s,
+		key:   key,
+	}
+}
+
 // Value can be used to access the methods for standard value types.
 type Value interface {
 	// Guard should panic if the key does not correspond to the correct type.
