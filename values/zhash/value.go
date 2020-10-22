@@ -32,7 +32,7 @@ type Value struct{ sortedset.SortedSet }
 // Item contains the value and the score for a particular key present in the zhash
 type Item struct {
 	Value string `json:"value"`
-	Score int `json:"score"`
+	Score int    `json:"score"`
 }
 
 // Various errors for zhash value type.

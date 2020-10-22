@@ -25,8 +25,8 @@ func (z *Zhash) Guard() {
 func (z *Zhash) GuardE() error { return z.store.guardValueE(zhash.Type, z.key) }
 
 // Insert inserts the elements to the zhash.
-func (h *Zhash) Insert(key, value string) error {
-	if _, err := h.store.Do(h.key, zhash.Insert, key, value); err != nil {
+func (z *Zhash) Insert(key, value string) error {
+	if _, err := z.store.Do(z.key, zhash.Insert, key, value); err != nil {
 		return err
 	}
 	return nil

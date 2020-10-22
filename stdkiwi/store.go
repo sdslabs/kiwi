@@ -113,6 +113,7 @@ func (s *Store) Zset(key string) *Zset {
 	}
 }
 
+// Zhash returns a "Zhash" with the key set as "key".
 func (s *Store) Zhash(key string) *Zhash {
 	return &Zhash{
 		store: s,
