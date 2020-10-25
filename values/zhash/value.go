@@ -82,9 +82,9 @@ const (
 	// Returns an integer.
 	Len kiwi.Action = "LEN"
 
-	// Get gets the score of given element.
+	// Get gets the score and vaue of given element.
 	//
-	// Returns an integer.
+	// Returns an item struct containing score and value of element.
 	Get kiwi.Action = "GET"
 
 	// PeekMax gets the element with maximum score.
