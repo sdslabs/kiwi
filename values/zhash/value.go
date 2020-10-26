@@ -87,6 +87,11 @@ const (
 	// Returns an item struct containing score and value of element.
 	Get kiwi.Action = "GET"
 
+	// Set set the vaue of given element.
+	//
+	// Returns they element's key
+	Set kiwi.Action = "SET"
+
 	// PeekMax gets the element with maximum score.
 	//
 	// Returns string value.
@@ -115,6 +120,7 @@ func (v *Value) DoMap() map[kiwi.Action]kiwi.DoFunc {
 		Get:       v.get,
 		PeekMax:   v.peekmax,
 		PeekMin:   v.peekmin,
+		Set:       v.set,
 	}
 }
 
@@ -146,6 +152,38 @@ func (v *Value) FromJSON(rawmessage json.RawMessage) error {
 	}
 
 	return nil
+}
+
+// set implements the SET action, to set the value of an existing key
+func (v *Value) set(params ...interface{}) (interface{}, error) {
+	if len(params) != 2 {
+		return nil, newParamLenErr(len(params), 2)
+	}
+
+	var (
+		ok    bool
+		key   string
+		value string
+	)
+
+	key, ok = params[0].(string)
+	if !ok {
+		return nil, newParamTypeErr(params[0], key)
+	}
+
+	value, ok = params[1].(string)
+	if !ok {
+		return nil, newParamTypeErr(params[0], value)
+	}
+
+	temp := (*v).GetByKey(key)
+	if temp == nil {
+		return nil, newParamValueErr(key)
+	}
+
+	(*v).AddOrUpdate(key, temp.Score(), value)
+
+	return key, nil
 }
 
 // insert implements the INSERT action.

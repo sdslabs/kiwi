@@ -5,8 +5,9 @@
 package stdkiwi
 
 import (
-	"github.com/sdslabs/kiwi/values/zhash"
 	"testing"
+
+	"github.com/sdslabs/kiwi/values/zhash"
 )
 
 func TestZHash(t *testing.T) {
@@ -21,12 +22,15 @@ func TestZHash(t *testing.T) {
 		t.Errorf("GuardE threw an error for default testKey: %v", err)
 	}
 
-
 	if err := s.Insert("a", "b"); err != nil {
 		t.Errorf("could not Insert: %v", err)
 	}
 	if err := s.Insert("c", "d"); err != nil {
 		t.Errorf("could not Insert: %v", err)
+	}
+
+	if err := s.Set("a", "e"); err != nil {
+		t.Errorf("could not Update: %v", err)
 	}
 
 	length, err := s.Len()
@@ -73,5 +77,9 @@ func TestZHash(t *testing.T) {
 
 	if minstr != "c" {
 		t.Errorf("expected element: %q; got: %q", "f", minstr)
+	}
+
+	if err := s.Remove("a", "c"); err != nil {
+		t.Errorf("Unexpected error when removing elements: %v", err)
 	}
 }

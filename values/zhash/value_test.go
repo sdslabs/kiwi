@@ -15,7 +15,7 @@ import (
 )
 
 type keyValuePair struct {
-	key string
+	key   string
 	value string
 }
 
@@ -38,7 +38,7 @@ func TestZhash_Insert(t *testing.T) {
 
 	str, ok := v.(string)
 	if !ok {
-		t.Errorf("Insert did not return []string rather got %T", v)
+		t.Errorf("Insert did not return string rather got %T", v)
 	}
 
 	if str != toInsert {
@@ -63,6 +63,60 @@ func TestZhash_Insert(t *testing.T) {
 
 	if er := errors.Unwrap(err); er != ErrInvalidParamLen {
 		t.Errorf("expected ErrInvalidParamLen while inserting with 0 parameters; got %v", err)
+	}
+}
+
+func TestZhash_Set(t *testing.T) {
+	store, err := newTestStore()
+	if err != nil {
+		t.Fatalf("couldn't create store: %v", err)
+	}
+
+	key := "random key"
+	value := "random value"
+
+	_, err = store.Do(testKey, Insert, key)
+	if err != nil {
+		t.Errorf("could not insert %q to zhash: %v", key, err)
+	}
+
+	v, err := store.Do(testKey, Set, key, value)
+
+	str, ok := v.(string)
+	if !ok {
+		t.Errorf("Insert did not return string rather got %T", v)
+	}
+
+	if str != key {
+		t.Errorf("expected %q; got %q", key, str)
+	}
+
+	// trying with invalid number of parameters
+	_, err = store.Do(testKey, Set, key)
+	if err == nil {
+		t.Errorf("expected error; got nil while setting with invalid number of params (0)")
+	}
+
+	if er := errors.Unwrap(err); er != ErrInvalidParamLen {
+		t.Errorf("expected ErrInvalidParamLen while inserting with 0 parameters; got %v", err)
+	}
+
+	// testing for invalid parameter types
+	_, err = store.Do(testKey, Set, key, 10)
+	if err == nil {
+		t.Errorf("expected error; numeric value must return an error")
+	}
+
+	// testing for invalid parameter types
+	_, err = store.Do(testKey, Set, 10, value)
+	if err == nil {
+		t.Errorf("expected error; numeric key must return an error")
+	}
+
+	// testing for non-existing key
+	_, err = store.Do(testKey, Set, "wrong key", value)
+	if err == nil {
+		t.Errorf("expected error; trying to retrieve inexistent value must return an error")
 	}
 }
 
@@ -443,7 +497,7 @@ func TestZHash_JSON(t *testing.T) {
 	// To test the representation in JSON, we can create a test value with
 	// only one key, hence change in ordering won't affect the outcome.
 	testK, testS, testV := "a", 102, "b"
-	expectedJSON, err := json.Marshal(map[string]Item{testK: Item{testV, testS}})
+	expectedJSON, err := json.Marshal(map[string]Item{testK: {testV, testS}})
 	if err != nil {
 		t.Fatalf("cannot marshal map to test: %v", err)
 	}

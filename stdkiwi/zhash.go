@@ -32,6 +32,14 @@ func (z *Zhash) Insert(key, value string) error {
 	return nil
 }
 
+// Insert sets the value of an pre-existing key of the zhash.
+func (z *Zhash) Set(key, value string) error {
+	if _, err := z.store.Do(z.key, zhash.Set, key, value); err != nil {
+		return err
+	}
+	return nil
+}
+
 // Remove removes the elements from the zhash.
 func (z *Zhash) Remove(elements ...string) error {
 	if len(elements) == 0 {
