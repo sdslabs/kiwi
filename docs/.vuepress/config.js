@@ -52,6 +52,7 @@ module.exports = {
           children: [
             '',
             'get-started',
+            'benchmarks',
           ]
         },
         {
