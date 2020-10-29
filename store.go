@@ -52,65 +52,72 @@ func NewStoreFromSchema(schema Schema) (*Store, error) {
 // KeyExists tells if the key exists or not.
 func (s *Store) KeyExists(key string) bool {
 	s.mu.RLock()
-	defer s.mu.RUnlock()
-
-	return s.keyExists(key) == nil
+	exists := s.keyExists(key) == nil
+	s.mu.RUnlock()
+	return exists
 }
 
 // AddKey adds a new key to the store. It throws an error if the key already exists.
 func (s *Store) AddKey(key string, typ ValueType) error {
 	s.mu.Lock()
-	defer s.mu.Unlock()
 
 	if err := s.keyNotExist(key); err != nil {
+		s.mu.Unlock()
 		return err
 	}
 
 	v, err := newValue(typ)
 	if err != nil {
+		s.mu.Unlock()
 		return err
 	}
 
 	s.kv[key] = valWrapper{val: v, mu: &sync.RWMutex{}}
+	s.mu.Unlock()
 	return nil
 }
 
 // UpdateKey updates the key if it exists. Throws an error if it doesn't.
 func (s *Store) UpdateKey(key string, typ ValueType) error {
 	s.mu.Lock()
-	defer s.mu.Unlock()
 
 	if err := s.keyExists(key); err != nil {
+		s.mu.Unlock()
 		return err
 	}
 
 	v, err := newValue(typ)
 	if err != nil {
+		s.mu.Unlock()
 		return err
 	}
 
 	old := s.kv[key]
-	old.mu.Lock()
-	defer old.mu.Unlock()
 
+	old.mu.Lock()
 	s.kv[key] = valWrapper{val: v, mu: &sync.RWMutex{}}
+	old.mu.Unlock()
+
+	s.mu.Unlock()
 	return nil
 }
 
 // DeleteKey deletes the key if it exists. Throws an error if it doesn't.
 func (s *Store) DeleteKey(key string) error {
 	s.mu.Lock()
-	defer s.mu.Unlock()
 
 	if err := s.keyExists(key); err != nil {
+		s.mu.Unlock()
 		return err
 	}
 
 	old := s.kv[key]
-	old.mu.Lock()
-	defer old.mu.Unlock()
 
+	old.mu.Lock()
 	delete(s.kv, key)
+	old.mu.Unlock()
+
+	s.mu.Unlock()
 	return nil
 }
 
@@ -125,17 +132,18 @@ func (s *Store) GetValueType(key string) (ValueType, error) {
 	s.mu.RUnlock()
 
 	v.mu.RLock()
-	defer v.mu.RUnlock()
+	typ := v.val.Type()
+	v.mu.RUnlock()
 
-	return v.val.Type(), nil
+	return typ, nil
 }
 
 // GetSchema returns the schema of the store.
 func (s *Store) GetSchema() Schema {
 	s.mu.RLock()
-	defer s.mu.RUnlock()
-
-	return s.getSchema()
+	schema := s.getSchema()
+	s.mu.RUnlock()
+	return schema
 }
 
 // getSchema returns the schema.
@@ -159,14 +167,16 @@ func (s *Store) Do(key string, action Action, params ...interface{}) (interface{
 	s.mu.RUnlock()
 
 	v.mu.Lock()
-	defer v.mu.Unlock()
 
 	doFunc, ok := v.val.DoMap()[action]
 	if !ok {
+		v.mu.Unlock()
 		return nil, fmt.Errorf("%w: %v", ErrInvalidAction, action)
 	}
 
 	res, err := doFunc(params...)
+
+	v.mu.Unlock()
 	return res, err
 }
 
@@ -181,9 +191,9 @@ func (s *Store) ToJSON(key string) (json.RawMessage, error) {
 	s.mu.RUnlock()
 
 	v.mu.RLock()
-	defer v.mu.RUnlock()
-
-	return s.toJSON(&v)
+	jsonval, err := s.toJSON(&v)
+	v.mu.RUnlock()
+	return jsonval, err
 }
 
 // toJSON converts the value's data to JSON.
@@ -207,9 +217,9 @@ func (s *Store) FromJSON(key string, rawmessage json.RawMessage) error {
 	s.mu.RUnlock()
 
 	v.mu.Lock()
-	defer v.mu.Unlock()
-
-	return s.fromJSON(&v, rawmessage)
+	err := s.fromJSON(&v, rawmessage)
+	v.mu.Unlock()
+	return err
 }
 
 // fromJSON converts the raw JSON to the value.
@@ -250,7 +260,6 @@ type StoreJSON = map[string]ValJSON
 //
 func (s *Store) Export() (json.RawMessage, error) {
 	s.mu.RLock()
-	defer s.mu.RUnlock()
 
 	schema := s.getSchema()
 	sjson := make(StoreJSON, len(schema))
@@ -262,6 +271,7 @@ func (s *Store) Export() (json.RawMessage, error) {
 		data, err := s.toJSON(&vw)
 		vw.mu.Unlock()
 		if err != nil {
+			s.mu.RUnlock()
 			return nil, fmt.Errorf("error exporting for %q key: %v", k, err)
 		}
 		sjson[k] = ValJSON{
@@ -269,6 +279,8 @@ func (s *Store) Export() (json.RawMessage, error) {
 			Data: data,
 		}
 	}
+
+	s.mu.RUnlock()
 
 	c, err := json.Marshal(sjson)
 	if err != nil {
@@ -325,7 +337,6 @@ func (s *Store) Import(rawmessage json.RawMessage, opts ImportOpts) error {
 
 	// Lock the store for whole of the process now.
 	s.mu.Lock()
-	defer s.mu.Unlock()
 
 	for k := range sjson {
 		if err := s.keyExists(k); err != nil {
@@ -333,10 +344,12 @@ func (s *Store) Import(rawmessage json.RawMessage, opts ImportOpts) error {
 				continue
 			}
 			if !opts.AddKeys && opts.ErrOnInvalidKey {
+				s.mu.Unlock()
 				return err
 			}
 			if opts.AddKeys {
 				if er := s.AddKey(k, ValueType(sjson[k].Type)); er != nil {
+					s.mu.Unlock()
 					return er
 				}
 			}
@@ -345,29 +358,31 @@ func (s *Store) Import(rawmessage json.RawMessage, opts ImportOpts) error {
 		// now that the key exists
 		v := s.kv[k]
 
-		if err := func() error {
-			v.mu.Lock()
-			defer v.mu.Unlock()
+		v.mu.Lock()
 
-			if sjson[k].Type != string(v.val.Type()) {
-				if !opts.UpdateTypes {
-					return fmt.Errorf("value type in JSON and store schema do not match")
-				}
-				if er := s.UpdateKey(k, ValueType(sjson[k].Type)); er != nil {
-					return er
-				}
+		if sjson[k].Type != string(v.val.Type()) {
+			if !opts.UpdateTypes {
+				v.mu.Unlock()
+				s.mu.Unlock()
+				return fmt.Errorf("value type in JSON and store schema do not match")
 			}
-
-			if err := s.FromJSON(k, sjson[k].Data); err != nil {
-				return err
+			if er := s.UpdateKey(k, ValueType(sjson[k].Type)); er != nil {
+				v.mu.Unlock()
+				s.mu.Unlock()
+				return er
 			}
+		}
 
-			return nil
-		}(); err != nil {
+		if err := s.FromJSON(k, sjson[k].Data); err != nil {
+			v.mu.Unlock()
+			s.mu.Unlock()
 			return err
 		}
+
+		v.mu.Unlock()
 	}
 
+	s.mu.Unlock()
 	return nil
 }
 
