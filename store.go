@@ -72,7 +72,7 @@ func (s *Store) AddKey(key string, typ ValueType) error {
 		return err
 	}
 
-	s.kv[key] = valWrapper{val: v, mu: &sync.RWMutex{}}
+	s.setValWrapper(key, v)
 	s.mu.Unlock()
 	return nil
 }
@@ -95,11 +95,20 @@ func (s *Store) UpdateKey(key string, typ ValueType) error {
 	old := s.kv[key]
 
 	old.mu.Lock()
-	s.kv[key] = valWrapper{val: v, mu: &sync.RWMutex{}}
+	s.setValWrapper(key, v)
 	old.mu.Unlock()
 
 	s.mu.Unlock()
 	return nil
+}
+
+// setValWrapper sets the value for given key in store.
+func (s *Store) setValWrapper(key string, val Value) {
+	s.kv[key] = valWrapper{
+		val:         val,
+		mu:          &sync.RWMutex{},
+		doMapCached: val.DoMap(),
+	}
 }
 
 // DeleteKey deletes the key if it exists. Throws an error if it doesn't.
@@ -156,7 +165,7 @@ func (s *Store) getSchema() Schema {
 	return schema
 }
 
-// Do executes the action for the value associated with the value.
+// Do executes the action for the value associated with the key.
 func (s *Store) Do(key string, action Action, params ...interface{}) (interface{}, error) {
 	s.mu.RLock()
 	if err := s.keyExists(key); err != nil {
@@ -166,17 +175,15 @@ func (s *Store) Do(key string, action Action, params ...interface{}) (interface{
 	v := s.kv[key]
 	s.mu.RUnlock()
 
-	v.mu.Lock()
-
-	doFunc, ok := v.val.DoMap()[action]
+	doFunc, ok := v.doMapCached[action]
 	if !ok {
-		v.mu.Unlock()
 		return nil, fmt.Errorf("%w: %v", ErrInvalidAction, action)
 	}
 
+	v.mu.Lock()
 	res, err := doFunc(params...)
-
 	v.mu.Unlock()
+
 	return res, err
 }
 
@@ -425,6 +432,10 @@ func (s Schema) String() string {
 type valWrapper struct {
 	mu  *sync.RWMutex
 	val Value
+
+	// caching do map avoids allocation for the map each time an action is
+	// executed, hence, improving the performance.
+	doMapCached map[Action]DoFunc
 }
 
 // Interface guard.
