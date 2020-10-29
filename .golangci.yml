@@ -9,57 +9,37 @@ linters:
     enable:
         - govet
         - errcheck
-        - golint
         - staticcheck
-        - gocritic
+        - unused
         - gosimple
+        - bodyclose
+        - noctx
+        - golint
         - gosec
-        - interfacer
         - unconvert
-        - ineffassign
         - goconst
+        - gocyclo
         - gofmt
         - goimports
-        - bodyclose
+        - goheader
         - misspell
-        - scopelint
         - lll
-        - gocyclo
-        - typecheck
-        - whitespace
+        - prealloc
 
 linters-settings:
-
     govet:
         check-shadowing: true
         settings:
             printf:
                 funcs:
-                    - (github.com/sirupsen/logrus).Infof
-                    - (github.com/sirupsen/logrus).Warnf
-                    - (github.com/sirupsen/logrus).Errorf
-                    - (github.com/sirupsen/logrus).Fatalf
+                    - (github.com/sirupsen/logrus.Logger).Infof
+                    - (github.com/sirupsen/logrus.Logger).Warnf
+                    - (github.com/sirupsen/logrus.Logger).Errorf
+                    - (github.com/sirupsen/logrus.Logger).Fatalf
 
     errcheck:
         check-type-assertions: true
         check-blank: true
-
-    golint:
-        min-confidence: 0.8
-
-    gocritic:
-        enabled-tags:
-             - diagnostic
-             - experimental
-             - opinionated
-             - performance
-             - style
-        disabled-checks:
-             - dupImport # https://github.com/go-critic/go-critic/issues/845
-             - ifElseChain
-             - octalLiteral
-             - whyNoLint
-             - wrapperFunc
 
     goconst:
         min-len: 2
@@ -69,14 +49,25 @@ linters-settings:
         simplify: true
 
     goimports:
-        local-prefixes: github.com/sdslabs/kiwi
+        local-prefixes: github.com/sdslabs/pinger
 
     misspell:
         locale: US
         ignore-words: []
 
     lll:
-        line-length: 140
+        line-length: 120
+        tab-width: 4
 
     gocyclo:
         min-complexity: 20
+
+    goheader:
+        values:
+            const:
+                COMPANY: SDSLabs
+            regexp:
+                YEAR: 202[0-9]
+        template: "Copyright (c) {{ YEAR }} {{ COMPANY }}\n\
+               Use of this source code is governed by an MIT license\n\
+               details of which can be found in the LICENSE file."
