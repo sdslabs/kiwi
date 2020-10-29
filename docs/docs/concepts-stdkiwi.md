@@ -79,13 +79,15 @@ fmt.Println(exists) // true
 
 The value types registered with stdkiwi are:
 
-| Type | Package                                                                                        | Type   | Method |
-| ---- | ---------------------------------------------------------------------------------------------- | ------ | ------ |
-| str  | [github.com/sdslabs/kiwi/values/str](https://pkg.go.dev/github.com/sdslabs/kiwi/values/str))   | `Str`  | `Str`  |
-| list | [github.com/sdslabs/kiwi/values/list](https://pkg.go.dev/github.com/sdslabs/kiwi/values/list)) | `List` | `List` |
-| set  | [github.com/sdslabs/kiwi/values/set](https://pkg.go.dev/github.com/sdslabs/kiwi/values/set))   | `Set`  | `Set`  |
-| hash | [github.com/sdslabs/kiwi/values/hash](https://pkg.go.dev/github.com/sdslabs/kiwi/values/hash)) | `Hash` | `Hash` |
-| zset | [github.com/sdslabs/kiwi/values/zset](https://pkg.go.dev/github.com/sdslabs/kiwi/values/zset)) | `Zset` | `Str`  |
+| Type  | Package                                                                                         | Type    | Method  |
+| ----- | ----------------------------------------------------------------------------------------------- | ------- | ------- |
+| str   | [github.com/sdslabs/kiwi/values/str](https://pkg.go.dev/github.com/sdslabs/kiwi/values/str)     | `Str`   | `Str`   |
+| list  | [github.com/sdslabs/kiwi/values/list](https://pkg.go.dev/github.com/sdslabs/kiwi/values/list)   | `List`  | `List`  |
+| set   | [github.com/sdslabs/kiwi/values/set](https://pkg.go.dev/github.com/sdslabs/kiwi/values/set)     | `Set`   | `Set`   |
+| hash  | [github.com/sdslabs/kiwi/values/hash](https://pkg.go.dev/github.com/sdslabs/kiwi/values/hash)   | `Hash`  | `Hash`  |
+| zset  | [github.com/sdslabs/kiwi/values/zset](https://pkg.go.dev/github.com/sdslabs/kiwi/values/zset)   | `Zset`  | `Zset`  |
+| zhash | [github.com/sdslabs/kiwi/values/zhash](https://pkg.go.dev/github.com/sdslabs/kiwi/values/zhash) | `Zhash` | `Zhash` |
+
 
 ## Guards
 
