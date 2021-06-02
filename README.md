@@ -7,7 +7,7 @@
 ## Overview
 
 You can think of Kiwi as thread safe global variables. This kind of library
-comes in helpful when you need to manage state accross your application which
+comes in helpful when you need to manage state across your application which
 can be mutated with multiple threads. Kiwi protects your keys with mutex locks
 so you don't have to.
 
